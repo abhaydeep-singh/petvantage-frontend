@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import './App.css'
 import { Landing, UserDashboard } from './pages'
 function App() {
@@ -7,7 +8,8 @@ function App() {
    <>
     <div className='dark bg-background overflow-auto min-h-screen w-full'>
     {/* <Landing/> */}
-    <UserDashboard/>
+    {/* <UserDashboard/> */}
+    <Outlet/>
     </div>
    </>
   )

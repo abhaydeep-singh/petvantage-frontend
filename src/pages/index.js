@@ -1,6 +1,6 @@
 import Landing from "./Landing";
 import UserDashboard from "./UserDashboard";
-// import UserHome from "./UserHome";
+import UserHome from "./UserHome";
 // import UserBlog from "./UserBlog";
 
-export {Landing, UserDashboard};
+export {Landing, UserDashboard,UserHome};

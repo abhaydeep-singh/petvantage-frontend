@@ -1,2 +1,3 @@
 import Navbar from "./Navbar.jsx";
-export {Navbar};
+import SidebarComponent from "./SidebarComponent.jsx"
+export {Navbar, SidebarComponent};
