@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils"; // ShadCN utility for class merging
 
@@ -9,29 +9,45 @@ const petCategories = [
   { name: "Birds", bgColor: "bg-red-500" },
 ];
 
-const NGOCategories = [
-  { name: "Dogs", bgColor: "bg-blue-500" },
-  { name: "Cats", bgColor: "bg-yellow-500" },
-  { name: "Rabbits", bgColor: "bg-green-500" },
-  { name: "Birds", bgColor: "bg-red-500" }, 
-  { name: "Dogs", bgColor: "bg-blue-500" },
-  { name: "Cats", bgColor: "bg-yellow-500" },
-  { name: "Rabbits", bgColor: "bg-green-500" },
-  { name: "Birds", bgColor: "bg-red-500" }, 
-  { name: "Dogs", bgColor: "bg-blue-500" },
-  { name: "Cats", bgColor: "bg-yellow-500" },
-  { name: "Rabbits", bgColor: "bg-green-500" },
-  { name: "Birds", bgColor: "bg-red-500" },
+// Background images for hero section
+const backgroundImages = [
+  "/images/hero1.jpg",
+  "/images/hero2.jpg",
+  "/images/hero3.jpg",
+  "/images/hero4.jpg",
+  "/images/hero5.jpg",
+  "/images/hero6.jpg",
+  
 ];
 
 function UserHome() {
-    const [isOpen, setIsOpen] = useState(false); // Controls sidebar state //TODO: require state Management
+  const [isOpen, setIsOpen] = useState(false); // Controls sidebar state //TODO: require state Management
+  const [bgIndex, setBgIndex] = useState(0); // Controls background image index
+
+  // Automatically change background image every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
-     <div className={cn("flex-1 transition-all", isOpen ? "sm:ml-64" : "sm:ml-16")}>
-        {/* Hero Section */}
-        <div className="flex items-center justify-center h-[40vh] shadow-md">
-          <h1 className="text-primary text-3xl font-bold">Welcome, UserName</h1>
+      <div className={cn("flex-1 transition-all", isOpen ? "sm:ml-64" : "sm:ml-16")}>
+        {/* Hero Section with Sliding Background */}
+        <div
+          className="relative flex items-center justify-center h-[60vh] shadow-md bg-cover bg-center transition-all duration-1000"
+          style={{
+            backgroundImage: `url(${backgroundImages[bgIndex]})`,
+          }}
+        >
+          {/* Dark Overlay for Readability */}
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <h1 className="relative text-primary text-3xl font-bold text-white">
+            Welcome, UserName
+          </h1>
         </div>
         <hr />
 
@@ -55,20 +71,10 @@ function UserHome() {
             ))}
           </div>
         </div>
-<hr />
-
-      {/* Featured Articles */}
-      
-
-
-       
-
-
-
-
-      </div> 
+        <hr />
+      </div>
     </>
-  )
+  );
 }
 
-export default UserHome
+export default UserHome;
