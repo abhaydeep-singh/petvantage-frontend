@@ -9,6 +9,21 @@ const petCategories = [
   { name: "Birds", bgColor: "bg-red-500" },
 ];
 
+const NGOCategories = [
+  { name: "Dogs", bgColor: "bg-blue-500" },
+  { name: "Cats", bgColor: "bg-yellow-500" },
+  { name: "Rabbits", bgColor: "bg-green-500" },
+  { name: "Birds", bgColor: "bg-red-500" }, 
+  { name: "Dogs", bgColor: "bg-blue-500" },
+  { name: "Cats", bgColor: "bg-yellow-500" },
+  { name: "Rabbits", bgColor: "bg-green-500" },
+  { name: "Birds", bgColor: "bg-red-500" }, 
+  { name: "Dogs", bgColor: "bg-blue-500" },
+  { name: "Cats", bgColor: "bg-yellow-500" },
+  { name: "Rabbits", bgColor: "bg-green-500" },
+  { name: "Birds", bgColor: "bg-red-500" },
+];
+
 function UserHome() {
     const [isOpen, setIsOpen] = useState(false); // Controls sidebar state //TODO: require state Management
   return (
@@ -40,6 +55,17 @@ function UserHome() {
             ))}
           </div>
         </div>
+<hr />
+
+      {/* Featured Articles */}
+      
+
+
+       
+
+
+
+
       </div> 
     </>
   )
