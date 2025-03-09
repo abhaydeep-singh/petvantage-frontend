@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils"; // ShadCN utility for class merging
+import { FeaturedArticles } from "@/components";
 
 const petCategories = [
   { name: "Dogs", bgColor: "bg-blue-500" },
@@ -45,7 +46,7 @@ function UserHome() {
         >
           {/* Dark Overlay for Readability */}
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-          <h1 className="relative text-primary text-3xl font-bold text-white">
+          <h1 className="relative text-primary text-6xl font-bold">
             Welcome, UserName
           </h1>
         </div>
@@ -71,7 +72,8 @@ function UserHome() {
             ))}
           </div>
         </div>
-        <hr />
+        <hr/>
+        <FeaturedArticles/>
       </div>
     </>
   );

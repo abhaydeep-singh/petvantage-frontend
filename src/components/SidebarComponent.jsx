@@ -7,9 +7,22 @@ import {
   Menu,
   ChevronLeft,
   ChevronRight,
+  LogOut
 } from "lucide-react";
 import { cn } from "@/lib/utils"; // ShadCN utility for class merging
 import { useNavigate } from "react-router-dom";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 // import { Sidebar } from "@/components";
 
@@ -69,7 +82,7 @@ function SidebarComponent() {
               icon={<Home size={24} />}
               text="Home"
               // href="/"
-              onClick={()=>navigate("/user-dashboard/user-home")}
+              onClick={() => navigate("/user-dashboard/user-home")}
               isOpen={isOpen}
             />
             <SidebarItem
@@ -82,15 +95,41 @@ function SidebarComponent() {
             <SidebarItem
               icon={<MessageSquare size={24} />}
               text="Community"
-              href="/community"
+              // href="/community"
               isOpen={isOpen}
             />
             <SidebarItem
               icon={<FileText size={24} />}
               text="Blog"
-              href="/blog"
+              // href="/blog"
               isOpen={isOpen}
             />
+            {/*Logout Alert Dialog   FIXME: Add dark mode*/}
+            <AlertDialog>
+              {/* asChild let us add custom button instead of default one */}
+              <AlertDialogTrigger asChild>
+                <SidebarItem
+                  icon={<LogOut size={24} />}
+                  text="Logout"
+                  // href="/blog"
+                  // onClick={}
+                  isOpen={isOpen}
+                />
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction>Continue</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </nav>
         </div>
 
@@ -109,7 +148,6 @@ function SidebarComponent() {
 
 export default SidebarComponent;
 
-
 // Internal Functional Component
 const SidebarItem = ({ icon, text, isOpen, onClick }) => (
   <button
@@ -117,10 +155,15 @@ const SidebarItem = ({ icon, text, isOpen, onClick }) => (
     className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-700 transition relative group w-full text-left"
   >
     {/* Fix: Prevent shrinking */}
-    <span className="w-6 flex justify-center flex-shrink-0">{icon}</span> 
+    <span className="w-6 flex justify-center flex-shrink-0">{icon}</span>
 
     {/* Sidebar Text (Will disappear on collapse) */}
-    <span className={cn("transition-all", isOpen ? "opacity-100" : "opacity-0 hidden")}>
+    <span
+      className={cn(
+        "transition-all",
+        isOpen ? "opacity-100" : "opacity-0 hidden"
+      )}
+    >
       {text}
     </span>
 
@@ -132,4 +175,3 @@ const SidebarItem = ({ icon, text, isOpen, onClick }) => (
     )}
   </button>
 );
-
