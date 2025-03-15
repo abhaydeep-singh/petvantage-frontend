@@ -4,7 +4,7 @@ import birds1 from "../assets/images/birds1.jpg"
 import peta from "../assets/images/peta.jpg"
 function FeaturedArticles() {
   return (
-    <div className='w-full h-[50vh] p-5'>
+    <div className='w-full h-[80vh] p-5'>
       <br />
       <h2 className='text-primary text-center text-6xl'>Featured Articles</h2>
       <br /><br />

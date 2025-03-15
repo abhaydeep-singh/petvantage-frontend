@@ -74,6 +74,9 @@ function UserHome() {
         </div>
         <hr/>
         <FeaturedArticles/>
+        <br />
+        <hr />
+        <br /><br />
       </div>
     </>
   );
