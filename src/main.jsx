@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { Landing, UserDashboard,UserHome } from "./pages";
+import { Article, Blog, Landing, UserDashboard,UserHome } from "./pages";
 import App from "./App.jsx";
 import {
   Route,
@@ -17,6 +17,8 @@ const router = createBrowserRouter(
       <Route path="" element={<Landing />} />
       <Route path="user-dashboard" element={<UserDashboard />}>
             <Route path="user-home" element={<UserHome/>}/>
+            <Route path="blog" element={<Blog/>}/>
+            <Route path="article" element={<Article/>}/>
       </Route>
       {/* <Route path='contact' element={<Contact />} /> */}
     </Route>

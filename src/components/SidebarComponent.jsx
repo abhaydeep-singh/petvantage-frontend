@@ -102,6 +102,7 @@ function SidebarComponent() {
               icon={<FileText size={24} />}
               text="Blog"
               // href="/blog"
+              onClick={() => navigate("/user-dashboard/blog")}
               isOpen={isOpen}
             />
             {/*Logout Alert Dialog   FIXME: Add dark mode*/}
