@@ -6,7 +6,7 @@ function App() {
 
   return (
    <>
-    <div className='dark bg-background overflow-auto min-h-screen w-full'>
+    <div className='overflow-auto min-h-screen w-full'>
     {/* <Landing/> */}
     {/* <UserDashboard/> */}
     <Outlet/>
