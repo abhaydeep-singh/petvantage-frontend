@@ -3,6 +3,7 @@ import UserDashboard from "./UserDashboard";
 import UserHome from "./UserHome";
 import Blog from "./Blog";
 import Article from "./Article";
+import NGODashboard from "./NGODashboard";
 // import UserBlog from "./UserBlog";
 
-export {Landing, UserDashboard,UserHome,Blog,Article};
+export {Landing, UserDashboard,UserHome,Blog,Article,NGODashboard};
