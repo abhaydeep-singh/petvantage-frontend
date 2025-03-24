@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Home,
   ShoppingCart,
+  SquareCheck,
   MessageSquare,
   FileText,
   Menu,
@@ -28,7 +29,7 @@ import {
 
 // { isMobileOpen, setIsMobileOpen }
 function SidebarComponent() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false); //TODO: I did Flase here
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const navigate = useNavigate();
   return (
@@ -74,7 +75,7 @@ function SidebarComponent() {
               isOpen ? "opacity-100" : "opacity-0 hidden"
             )}
           >
-            🐾 Pet Dashboard
+            🐾 User Dashboard
           </h2>
 
           <nav className="mt-14 space-y-4 flex flex-col items-start">
@@ -86,9 +87,9 @@ function SidebarComponent() {
               isOpen={isOpen}
             />
             <SidebarItem
-              icon={<ShoppingCart size={24} />}
-              text="Marketplace"
-              // onClick={()=>navigate("/user-dashboard")}
+              icon={<SquareCheck size={24} />}
+              text="View Requests"
+              onClick={()=>navigate("/user-dashboard/requests")}
               // href="/marketplace"
               isOpen={isOpen}
             />

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { NgoSidebarComponent, SidebarComponent } from "@/components";
+import { NgoSidebarComponent } from "@/components";
 import { Outlet } from "react-router-dom";
 
 function NGODashboard() {

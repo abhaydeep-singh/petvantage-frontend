@@ -28,7 +28,7 @@ import {
 
 // { isMobileOpen, setIsMobileOpen }
 function SidebarComponent() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false); //TODO: i changed this to false
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const navigate = useNavigate();
   return (
