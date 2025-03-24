@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 function NGODashboard() {
   return (
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen w-full">
         {/* Sidebar */}
        
         {/* <SidebarComponent isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen}/> */}

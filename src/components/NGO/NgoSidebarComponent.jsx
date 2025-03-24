@@ -87,8 +87,8 @@ function SidebarComponent() {
             />
             <SidebarItem
               icon={<ShoppingCart size={24} />}
-              text="Marketplace"
-              // onClick={()=>navigate("/user-dashboard")}
+              text="Manage Marketplace"
+              onClick={()=>navigate("/ngo-dashboard/marketplace")}
               // href="/marketplace"
               isOpen={isOpen}
             />
@@ -102,7 +102,7 @@ function SidebarComponent() {
               icon={<FileText size={24} />}
               text="Blog"
               // href="/blog"
-              onClick={() => navigate("/user-dashboard/blog")}
+              onClick={() => navigate("/ngo-dashboard/blog")}
               isOpen={isOpen}
             />
             {/*Logout Alert Dialog   FIXME: Add dark mode*/}

@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { Article, Blog, Landing, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome } from "./pages";
+import { Article, Blog, Landing, ManageMarketplace, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome } from "./pages";
 import App from "./App.jsx";
 import {
   Route,
@@ -30,6 +30,8 @@ const router = createBrowserRouter(
 
       <Route path="ngo-dashboard" element={<NGODashboard/>}>
             <Route path="ngo-home" element={<NGOHome/>}/>
+            <Route path="marketplace" element={<ManageMarketplace/>}/>
+            <Route path="blog" element={<Blog/>}/>
             
       </Route>
       {/* <Route path='contact' element={<Contact />} /> */}
