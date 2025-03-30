@@ -7,7 +7,8 @@ import NGODashboard from "./NGODashboard";
 import PetList from "./PetList";
 import RequestsUser from "./RequestsUser";
 import ManageMarketplace from "./ManageMarketplace";
+import UserMarketplace from "./UserMarketplace";
 
 // import UserBlog from "./UserBlog";
 
-export {Landing, UserDashboard,UserHome,Blog,Article,PetList,RequestsUser,NGODashboard, ManageMarketplace};
+export {Landing, UserDashboard,UserHome,Blog,Article,PetList,RequestsUser,NGODashboard, ManageMarketplace, UserMarketplace};

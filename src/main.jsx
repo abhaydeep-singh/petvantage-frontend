@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { Article, Blog, Landing, ManageMarketplace, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome } from "./pages";
+import { Article, Blog, Landing, ManageMarketplace, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome, UserMarketplace } from "./pages";
 import App from "./App.jsx";
 import {
   Route,
@@ -25,6 +25,7 @@ const router = createBrowserRouter(
             <Route path="article" element={<Article/>}/>
             <Route path="pet-list" element={<PetList/>}/>
             <Route path="requests" element={<RequestsUser/>}/>
+            <Route path="marketplace" element={<UserMarketplace/>}/>
             
       </Route>
 
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
             <Route path="ngo-home" element={<NGOHome/>}/>
             <Route path="marketplace" element={<ManageMarketplace/>}/>
             <Route path="blog" element={<Blog/>}/>
+
             
       </Route>
       {/* <Route path='contact' element={<Contact />} /> */}

@@ -94,11 +94,19 @@ function SidebarComponent() {
               isOpen={isOpen}
             />
             <SidebarItem
+              icon={<ShoppingCart size={24} />}
+              text="Marketplace"
+              onClick={()=>navigate("/user-dashboard/marketplace")}
+              // href="/community"
+              isOpen={isOpen}
+            />
+            <SidebarItem
               icon={<MessageSquare size={24} />}
               text="Community"
               // href="/community"
               isOpen={isOpen}
             />
+
             <SidebarItem
               icon={<FileText size={24} />}
               text="Blog"
