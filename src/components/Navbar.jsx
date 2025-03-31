@@ -4,7 +4,7 @@ import { Button } from './ui/button'
 
 function Navbar() {
   return (
-    <div className='text-white h-[10vh] flex items-center justify-between px-8'>
+    <div className='text-white h-[10vh] hidden md:flex items-center justify-between px-8  '>
         <div className="logo text-3xl font-bold text-primary">PetVantage</div>
       <ul className='flex'>
         <li><Button variant="default">Home</Button></li>

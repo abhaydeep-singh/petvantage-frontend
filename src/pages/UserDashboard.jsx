@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { SidebarComponent } from "@/components";
+import { ParticlesBackground, SidebarComponent } from "@/components";
 import { Outlet } from "react-router-dom";
 
 
@@ -11,7 +11,7 @@ export default function UserDashboard() {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-     
+     <ParticlesBackground/>
       {/* <SidebarComponent isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen}/> */}
       <SidebarComponent/>
 

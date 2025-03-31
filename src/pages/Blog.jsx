@@ -37,23 +37,22 @@
 
 
 
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export default function Blog() {
   return (
-    <div className=" text-white min-h-screen p-6 w-full ">
+    <div className=" text-white h-screen p-6 w-full ">
       <div className="max-w-4xl mx-auto">
         {/* Navbar */}
         <nav className="flex justify-between items-center py-4 border-b border-gray-700">
           <h1 className="text-3xl font-bold text-primary">PetVantage Blog</h1>
-          <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition">
-            Subscribe
-          </button>
+          <Button>Subscribe</Button>
         </nav>
 
         {/* Hero Section */}
         <header className="mt-8 text-center">
-          <h2 className="text-5xl font-extrabold text-white">Welcome to Our Blog</h2>
+          <h2 className="text-5xl font-extrabold text-primary">Welcome to Our Blog</h2>
           <p className="text-gray-400 mt-2">
             Insights, stories, and trends in the pet industry.
           </p>

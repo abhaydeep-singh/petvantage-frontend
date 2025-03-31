@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import {
   Home,
   ShoppingCart,
@@ -27,11 +28,16 @@ import {
 
 // import { Sidebar } from "@/components";
 
+
 // { isMobileOpen, setIsMobileOpen }
 function SidebarComponent() {
   const [isOpen, setIsOpen] = useState(false); //TODO: I did Flase here
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const navigate = useNavigate();
+      useEffect(() => {
+        navigate("/user-dashboard/user-home");
+      }, []);
+
   return (
     <>
       <div className="relative">

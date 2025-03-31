@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils"; // ShadCN utility for class merging
-import { FeaturedArticles } from "@/components";
+import { FeaturedArticles, ParticlesBackground } from "@/components";
 
 const petCategories = [
   { name: "Dogs", bgColor: "bg-blue-500" },
@@ -18,7 +18,6 @@ const backgroundImages = [
   "/images/hero4.jpg",
   "/images/hero5.jpg",
   "/images/hero6.jpg",
-  
 ];
 
 function UserHome() {
@@ -35,8 +34,13 @@ function UserHome() {
   }, []);
 
   return (
-    <>
-      <div className={cn("flex-1 transition-all", isOpen ? "sm:ml-64" : "sm:ml-16")}>
+    <div className="h-screen">
+      <div
+        className={cn(
+          "flex-1 transition-all",
+          isOpen ? "sm:ml-64" : "sm:ml-16"
+        )}
+      >
         {/* Hero Section with Sliding Background */}
         <div
           className="relative flex items-center justify-center h-[60vh] shadow-md bg-cover bg-center transition-all duration-1000"
@@ -44,9 +48,9 @@ function UserHome() {
             backgroundImage: `url(${backgroundImages[bgIndex]})`,
           }}
         >
-          {/* Dark Overlay for Readability */}
+          {/* Dark Overlay*/}
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-          <h1 className="relative text-primary text-6xl font-bold">
+          <h1 className="relative text-primary text-3xl md:text-6xl font-bold">
             Welcome, UserName
           </h1>
         </div>
@@ -54,7 +58,9 @@ function UserHome() {
 
         {/* Pet Categories */}
         <div className="container mx-auto px-4 py-8 text-primary">
-          <h2 className="text-2xl font-bold text-center mb-6">🐾 Browse Pet Categories</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
+            🐾 Browse Pet Categories
+          </h2>
           <br />
           <div className="flex flex-wrap justify-center gap-6 pb-12">
             {petCategories.map((pet, index) => (
@@ -64,21 +70,33 @@ function UserHome() {
                   <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                   {/* Pet Card Content */}
-                  <CardContent className={`p-6 flex items-center justify-center ${pet.bgColor} h-32 relative z-10`}>
-                    <span className="text-xl font-semibold text-white">{pet.name}</span>
+                  <CardContent
+                    className={`p-6 flex items-center justify-center ${pet.bgColor} h-32 relative z-10`}
+                  >
+                    <span className="text-xl font-semibold text-white">
+                      {pet.name}
+                    </span>
                   </CardContent>
                 </Card>
               </div>
             ))}
           </div>
         </div>
-        <hr/>
-        <FeaturedArticles/>
-        <br />
         <hr />
-        <br /><br />
+        <FeaturedArticles />
+
+        <br />
+
+        <br />
+        <br />
+
+        <footer className="bg-secondary text-white py-4 px-6 text-center">
+          <p className="text-sm">
+            &copy; {new Date().getFullYear()} PetVantage. All rights reserved.
+          </p>
+        </footer>
       </div>
-    </>
+    </div>
   );
 }
 

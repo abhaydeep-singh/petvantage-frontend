@@ -4,16 +4,18 @@ import dog from "../assets/images/dog1.jpg";
 import shopkeeper from "../assets/svg/shopkeeper.svg";
 import fish from "../assets/svg/fish.svg";
 import tips from "../assets/svg/tips.svg";
-import { Navbar } from "@/components";
+import { Navbar, ParticlesBackground, TrustedBy } from "@/components";
+import { useNavigate } from "react-router-dom";
 
 function Landing() {
+  const navigate = useNavigate();
   return (
-    <>
+    <div className="h-screen">
+    <ParticlesBackground />
 
     <Navbar/>
-
       {/* Upper/Hero Section */}
-      <div className="flex flex-col md:flex-row md:justify-center md:gap-3 xl:gap-8 md:items-center h-[80vh] md:h-[60vh] lg:h-[70vh] w-full p-4 border">
+      <div className="flex flex-col md:flex-row md:justify-center md:gap-3 xl:gap-8 md:items-center h-[80vh] md:h-[60vh] lg:h-[70vh] w-full p-4 border-t">
         <div className="text text-foreground my-6 ">
           <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-primary">
             FIND YOUR
@@ -70,12 +72,15 @@ function Landing() {
           </div>
         </div>
       </div>
-      <hr /> <br />
+      <br />
+      <h2 className="text-2xl lg:text-4xl font-semibold text-center mb-8 text-primary">
+        Trusted by Leading NGOs
+      </h2>
+      <TrustedBy/>
 
-
-
+      {/* <br /><br /><br /><br /> */}
       {/* CTA Section */}
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-10">
         <div>
           <h2 className="text-center text-primary font-semibold text-2xl p-2">
             Are You a pet lover? 
@@ -92,7 +97,7 @@ function Landing() {
             </p>
             <p className="text-white text-xl">Find Your New Best Friend</p>
 
-            <Button>Join Now</Button>
+            <Button onClick={()=>{navigate("/user-dashboard")}} >Join Now</Button>
           </div>
 
           <div className="card bg-secondary p-2 flex flex-col gap-3 items-center justify-evenly w-[80%] xl:w-[40%] h-[250px] md:h-[250px] xl:h-[300px] border rounded-3xl">
@@ -104,11 +109,11 @@ function Landing() {
               List Pets, Get Verified and Grow Your Bussiness
             </p>
 
-            <Button>Join Now</Button>
+            <Button onClick={()=>{navigate("/ngo-dashboard/ngo-home")}}>Join Now</Button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

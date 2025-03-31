@@ -5,4 +5,6 @@ import FeaturedArticles from "./FeaturedArticles.jsx";
 import DonationChart from "./NGO/DonationChart.jsx";
 import ProductCard from "./NGO/ProductCard.jsx";
 import Product from "./Product.jsx";
-export {Navbar, SidebarComponent, FeaturedArticles, NgoSidebarComponent, DonationChart, ProductCard, Product};
+import TrustedBy from "./ui/TrustedBy.jsx";
+import ParticlesBackground from "./ParticlesBackground.jsx";
+export {Navbar, SidebarComponent, FeaturedArticles, NgoSidebarComponent, DonationChart, ProductCard, Product, TrustedBy,ParticlesBackground};
