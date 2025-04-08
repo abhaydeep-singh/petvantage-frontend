@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"; // ShadCN utility for class merging
 import { FeaturedArticles, ParticlesBackground } from "@/components";
 
 const petCategories = [
-  { name: "Dogs", bgColor: "bg-blue-500" },
+  { name: "Dogs", bgColor: "bg-blue-500", nav:"" }, //FIXME:
   { name: "Cats", bgColor: "bg-yellow-500" },
   { name: "Rabbits", bgColor: "bg-green-500" },
   { name: "Birds", bgColor: "bg-red-500" },
@@ -55,6 +55,8 @@ function UserHome() {
           </h1>
         </div>
         <hr />
+
+
 
         {/* Pet Categories */}
         <div className="container mx-auto px-4 py-8 text-primary">
