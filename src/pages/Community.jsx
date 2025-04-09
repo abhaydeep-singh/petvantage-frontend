@@ -1,4 +1,4 @@
-import { CommunityPost } from "@/components";
+import { CommunityPost, CommunityPostInput } from "@/components";
 import React from "react";
 
 function Community() {
@@ -8,6 +8,9 @@ function Community() {
         <h1 className="text-primary text-4xl lg:text-6xl font-bold text-center my-6">
           COMMUNITY
         </h1>
+
+        <CommunityPostInput />
+        <br />
         <CommunityPost
           post={{
             user: {

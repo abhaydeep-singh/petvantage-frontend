@@ -8,4 +8,5 @@ import Product from "./Product.jsx";
 import TrustedBy from "./ui/TrustedBy.jsx";
 import ParticlesBackground from "./ParticlesBackground.jsx";
 import CommunityPost from "./CommunityPost.jsx";
-export {Navbar, SidebarComponent, FeaturedArticles, NgoSidebarComponent, DonationChart, ProductCard, Product, TrustedBy,ParticlesBackground, CommunityPost};
+import CommunityPostInput from "./CommunityPostInput.jsx";
+export {Navbar, SidebarComponent, FeaturedArticles, NgoSidebarComponent, DonationChart, ProductCard, Product, TrustedBy,ParticlesBackground, CommunityPost, CommunityPostInput};
