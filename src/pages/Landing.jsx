@@ -76,7 +76,7 @@ function Landing() {
       <h2 className="text-2xl lg:text-4xl font-semibold text-center my-8 text-primary">
         Trusted by Leading NGOs
       </h2>
-      <TrustedBy/>
+      <TrustedBy className="my-8"/>
 
       {/* <br /><br /><br /><br /> */}
       {/* CTA Section */}
