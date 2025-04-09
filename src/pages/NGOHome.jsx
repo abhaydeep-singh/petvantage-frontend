@@ -5,7 +5,7 @@ import React from 'react'
 function NGOHome() {
   return (
     // sm:ml-64 is open
-    <div className={`w-full ${false ? "sm:ml-64" : "sm:ml-16"}`}> 
+    <div className={`w-full h-screen ${false ? "sm:ml-64" : "sm:ml-16"}`}> 
     <div className="hero relative h-[40vh] w-full border flex items-center justify-center bg-cover bg-center"
      style={{
             backgroundImage: `url(/images/cat.jpg)`,

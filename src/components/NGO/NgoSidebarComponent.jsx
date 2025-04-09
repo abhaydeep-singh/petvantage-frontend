@@ -81,7 +81,6 @@ function SidebarComponent() {
             <SidebarItem
               icon={<Home size={24} />}
               text="Home"
-              // href="/"
               onClick={() => navigate("/ngo-dashboard/ngo-home")}
               isOpen={isOpen}
             />
@@ -89,19 +88,17 @@ function SidebarComponent() {
               icon={<ShoppingCart size={24} />}
               text="Manage Marketplace"
               onClick={()=>navigate("/ngo-dashboard/marketplace")}
-              // href="/marketplace"
               isOpen={isOpen}
             />
             <SidebarItem
               icon={<MessageSquare size={24} />}
               text="Community"
-              // href="/community"
+              onClick={()=>navigate("/ngo-dashboard/community")}
               isOpen={isOpen}
             />
             <SidebarItem
               icon={<FileText size={24} />}
               text="Blog"
-              // href="/blog"
               onClick={() => navigate("/ngo-dashboard/blog")}
               isOpen={isOpen}
             />
@@ -112,7 +109,6 @@ function SidebarComponent() {
                 <SidebarItem
                   icon={<LogOut size={24} />}
                   text="Logout"
-                  // href="/blog"
                   // onClick={}
                   isOpen={isOpen}
                 />

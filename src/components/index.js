@@ -7,4 +7,5 @@ import ProductCard from "./NGO/ProductCard.jsx";
 import Product from "./Product.jsx";
 import TrustedBy from "./ui/TrustedBy.jsx";
 import ParticlesBackground from "./ParticlesBackground.jsx";
-export {Navbar, SidebarComponent, FeaturedArticles, NgoSidebarComponent, DonationChart, ProductCard, Product, TrustedBy,ParticlesBackground};
+import CommunityPost from "./CommunityPost.jsx";
+export {Navbar, SidebarComponent, FeaturedArticles, NgoSidebarComponent, DonationChart, ProductCard, Product, TrustedBy,ParticlesBackground, CommunityPost};

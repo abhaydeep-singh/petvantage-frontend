@@ -69,7 +69,7 @@ function SidebarComponent() {
             <SidebarItem icon={<Home />} text="Home" onClick={() => navigate("/user-dashboard/user-home")} showText={isOpen} />
             <SidebarItem icon={<SquareCheck />} text="View Requests" onClick={() => navigate("/user-dashboard/requests")} showText={isOpen} />
             <SidebarItem icon={<ShoppingCart />} text="Marketplace" onClick={() => navigate("/user-dashboard/marketplace")} showText={isOpen} />
-            <SidebarItem icon={<MessageSquare />} text="Community" showText={isOpen} />
+            <SidebarItem icon={<MessageSquare />} text="Community"  onClick={() => navigate("/user-dashboard/community")} showText={isOpen} />
             <SidebarItem icon={<FileText />} text="Blog" onClick={() => navigate("/user-dashboard/blog")} showText={isOpen} />
             <AlertDialog>
               <AlertDialogTrigger asChild>
