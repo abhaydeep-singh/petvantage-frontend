@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Home,
   ShoppingCart,
+  SquareCheck,
   MessageSquare,
   FileText,
   Menu,
@@ -9,7 +10,7 @@ import {
   ChevronRight,
   LogOut
 } from "lucide-react";
-import { cn } from "@/lib/utils"; // ShadCN utility for class merging
+import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -24,17 +25,15 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-// import { Sidebar } from "@/components";
-
-// { isMobileOpen, setIsMobileOpen }
-function SidebarComponent() {
-  const [isOpen, setIsOpen] = useState(false); //TODO: i changed this to false
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+function NgoSidebarComponent() {
+  const [isOpen, setIsOpen] = useState(false); // Desktop Sidebar
+  const [isMobileOpen, setIsMobileOpen] = useState(false); // Mobile Sidebar
   const navigate = useNavigate();
+
   return (
     <>
       <div className="relative">
-        {/* Mobile Toggle Button / Hamburger*/}
+        {/* Mobile Toggle Button */}
         <button
           className="sm:hidden fixed top-4 left-4 z-50 bg-primary text-white p-2 rounded-md"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
@@ -42,83 +41,45 @@ function SidebarComponent() {
           <Menu size={24} />
         </button>
 
-        {/* Sidebar Container */}
-        {/* <div
-          className={cn(
-            "fixed top-0 left-0 h-full bg-secondary text-white p-4 hidden sm:flex flex-col transition-all duration-300",
-            isMobileOpen ? "w-64 translate-x-0" : "w-16 sm:translate-x-0",
-            isOpen ? "sm:w-64" : "sm:w-16"
-          )}
-        > */}
-
+        {/* Desktop Sidebar */}
         <div
           className={cn(
-            "fixed top-0 left-0 h-full bg-secondary text-white p-4 flex flex-col transition-all duration-300 z-50", // Add z-50
-            isMobileOpen ? "w-64 translate-x-0" : "w-16 sm:translate-x-0",
-            isOpen ? "sm:w-64" : "sm:w-16",
-            !isMobileOpen && "hidden sm:flex"
+            "hidden sm:flex fixed top-0 left-0 h-full bg-secondary text-white p-4 flex-col transition-all duration-300 z-50",
+            isOpen ? "w-64" : "w-16"
           )}
         >
           {/* Collapse Button */}
           <button
-            className="hidden sm:flex items-center justify-center absolute -right-5 top-6 w-10 h-10 text-black bg-primary rounded-full shadow-md"
+            className="absolute -right-5 top-6 w-10 h-10 text-black bg-primary rounded-full shadow-md flex items-center justify-center"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
           </button>
 
-          {/* Sidebar Content */}
           <h2
             className={cn(
               "text-xl font-bold transition-all",
               isOpen ? "opacity-100" : "opacity-0 hidden"
             )}
           >
-            🐾 NGO Dashboard
+            🐾 User Dashboard
           </h2>
 
           <nav className="mt-14 space-y-4 flex flex-col items-start">
-            <SidebarItem
-              icon={<Home size={24} />}
-              text="Home"
-              onClick={() => navigate("/ngo-dashboard/ngo-home")}
-              isOpen={isOpen}
-            />
-            <SidebarItem
-              icon={<ShoppingCart size={24} />}
-              text="Manage Marketplace"
-              onClick={()=>navigate("/ngo-dashboard/marketplace")}
-              isOpen={isOpen}
-            />
-            <SidebarItem
-              icon={<MessageSquare size={24} />}
-              text="Community"
-              onClick={()=>navigate("/ngo-dashboard/community")}
-              isOpen={isOpen}
-            />
-            <SidebarItem
-              icon={<FileText size={24} />}
-              text="Blog"
-              onClick={() => navigate("/ngo-dashboard/blog")}
-              isOpen={isOpen}
-            />
-            {/*Logout Alert Dialog   FIXME: Add dark mode*/}
+            <SidebarItem icon={<Home />} text="Home" onClick={() => navigate("/ngo-dashboard/ngo-home")} showText={isOpen} />
+            <SidebarItem icon={<SquareCheck />} text="Manage Requests" onClick={() => navigate("/ngo-dashboard/requests")} showText={isOpen} />
+            <SidebarItem icon={<ShoppingCart />} text="Marketplace" onClick={() => navigate("/ngo-dashboard/marketplace")} showText={isOpen} />
+            <SidebarItem icon={<MessageSquare />} text="Community"  onClick={() => navigate("/ngo-dashboard/community")} showText={isOpen} />
+            <SidebarItem icon={<FileText />} text="Blog" onClick={() => navigate("/ngo-dashboard/blog")} showText={isOpen} />
             <AlertDialog>
-              {/* asChild let us add custom button instead of default one */}
               <AlertDialogTrigger asChild>
-                <SidebarItem
-                  icon={<LogOut size={24} />}
-                  text="Logout"
-                  // onClick={}
-                  isOpen={isOpen}
-                />
+                <SidebarItem icon={<LogOut />} text="Logout" showText={isOpen} />
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
+                    This will permanently delete your account and remove your data.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
@@ -130,45 +91,59 @@ function SidebarComponent() {
           </nav>
         </div>
 
-        {/* Overlay for Mobile */}
-        {/* {isMobileOpen && <div className="fixed inset-0 bg-black bg-opacity-50 sm:hidden" onClick={() => setIsMobileOpen(false)}></div>} */}
+        {/* Mobile Sidebar */}
         {isMobileOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 sm:hidden z-40" // Ensure z-40 is here
-            onClick={() => setIsMobileOpen(false)}
-          ></div>
+          <>
+            <div className="fixed top-0 left-0 h-full w-64 bg-secondary text-white p-4 flex flex-col z-50 sm:hidden">
+              <h2 className="text-xl font-bold">🐾 User Dashboard</h2>
+
+              <nav className="mt-14 space-y-4 flex flex-col items-start">
+                <SidebarItem icon={<Home />} text="Home" onClick={() => navigate("/ngo-dashboard/ngo-home")} showText />
+                <SidebarItem icon={<SquareCheck />} text="View Requests" onClick={() => navigate("/ngo-dashboard/requests")} showText />
+                <SidebarItem icon={<ShoppingCart />} text="Marketplace" onClick={() => navigate("/ngo-dashboard/marketplace")} showText />
+                <SidebarItem icon={<MessageSquare />} text="Community" showText />
+                <SidebarItem icon={<FileText />} text="Blog" onClick={() => navigate("/ngo-dashboard/blog")} showText />
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <SidebarItem icon={<LogOut />} text="Logout" showText />
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This will permanently delete your account and remove your data.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction>Continue</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </nav>
+            </div>
+
+            {/* Overlay to close mobile sidebar */}
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 z-40"
+              onClick={() => setIsMobileOpen(false)}
+            ></div>
+          </>
         )}
       </div>
     </>
   );
 }
 
-export default SidebarComponent;
+export default NgoSidebarComponent;
 
-// Internal Functional Component
-const SidebarItem = ({ icon, text, isOpen, onClick }) => (
+// Sidebar Item Component
+const SidebarItem = ({ icon, text, showText, onClick }) => (
   <button
     onClick={onClick}
     className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-700 transition relative group w-full text-left"
   >
-    {/* Fix: Prevent shrinking */}
-    <span className="w-6 flex justify-center flex-shrink-0">{icon}</span>
-
-    {/* Sidebar Text (Will disappear on collapse) */}
-    <span
-      className={cn(
-        "transition-all",
-        isOpen ? "opacity-100" : "opacity-0 hidden"
-      )}
-    >
-      {text}
-    </span>
-
-    {/* Tooltip when collapsed */}
-    {!isOpen && (
-      <span className="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white px-2 py-1 text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-        {text}
-      </span>
-    )}
+    <span className="w-6 flex justify-center">{icon}</span>
+    {showText && <span className="transition-all">{text}</span>}
   </button>
 );
