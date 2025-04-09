@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { Article, Blog, Community, Landing, ManageMarketplace, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome, UserMarketplace } from "./pages";
+import { Article, Blog, Community, Landing, ManageMarketplace, ManageRequests, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome, UserMarketplace } from "./pages";
 import App from "./App.jsx";
 import {
   Route,
@@ -36,6 +36,7 @@ const router = createBrowserRouter(
             <Route path="marketplace" element={<ManageMarketplace/>}/>
             <Route path="blog" element={<Blog/>}/>
             <Route path="community" element={<Community/>}/>
+            <Route path="requests" element={<ManageRequests/>}/>
 
             
       </Route>
