@@ -13,7 +13,7 @@ const TrustedBy = () => {
   ];
 
   return (
-    <div className="py-10 bg-gray-600">
+    <div className="py-10 bg-secondary">
       {/* <h2 className="text-5xl font-semibold text-center mb-8 text-black">
         Trusted by Leading NGOs
       </h2> */}
