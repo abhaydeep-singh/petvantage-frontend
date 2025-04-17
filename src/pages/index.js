@@ -10,7 +10,8 @@ import ManageMarketplace from "./ManageMarketplace";
 import UserMarketplace from "./UserMarketplace";
 import Community from "./Community";
 import ManageRequests from "./ManageRequests";
+import Login from "./Login";
 
 // import UserBlog from "./UserBlog";
 
-export {Landing, UserDashboard,UserHome,Blog,Article,PetList,RequestsUser,NGODashboard, ManageMarketplace, UserMarketplace, Community, ManageRequests};
+export {Landing, UserDashboard,UserHome,Blog,Article,PetList,RequestsUser,NGODashboard, ManageMarketplace, UserMarketplace, Community, ManageRequests, Login};

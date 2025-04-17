@@ -30,9 +30,9 @@ function SidebarComponent() {
   const [isMobileOpen, setIsMobileOpen] = useState(false); // Mobile Sidebar
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    navigate("/user-dashboard/user-home")
-  },[])
+  // useEffect(()=>{
+  //   navigate("/user-dashboard/user-home")
+  // },[])
 
   return (
     <>

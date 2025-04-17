@@ -80,39 +80,7 @@ function Landing() {
 
       {/* <br /><br /><br /><br /> */}
       {/* CTA Section */}
-      <div className="flex flex-col mt-10">
-        <div>
-          <h2 className="text-center text-primary font-semibold text-2xl p-2">
-            Are You a pet lover? 
-          </h2>
-          <h3 className="text-center text-foreground text-xl">Join us Today</h3>
-        </div>
-        <br />
-        <br />
-        <div className="card-box flex flex-col w-full md:flex-row lg:w-[80%] items-center justify-center mx-auto gap-6 text-white">
-          <div className="card bg-secondary p-2 flex flex-col gap-3 items-center justify-evenly w-[80%] xl:w-[40%] h-[250px] md:h-[250px] xl:h-[300px] border rounded-3xl">
-            {/* <img src={fish} className="w-[60%]" alt="" /> */}
-            <p className="text-primary font-semibold text-4xl underline-offset-8">
-              For Pet Owners
-            </p>
-            <p className="text-white text-xl">Find Your New Best Friend</p>
-
-            <Button onClick={()=>{navigate("/user-dashboard")}} >Join Now</Button>
-          </div>
-
-          <div className="card bg-secondary p-2 flex flex-col gap-3 items-center justify-evenly w-[80%] xl:w-[40%] h-[250px] md:h-[250px] xl:h-[300px] border rounded-3xl">
-            {/* <img src={fish} className="w-[60%]" alt="" /> */}
-            <p className="text-primary font-semibold text-4xl underline-offset-8">
-              For NGO & Shelters
-            </p>
-            <p className="text-white text-xl text-center">
-              List Pets, Get Verified and Grow Your Bussiness
-            </p>
-
-            <Button onClick={()=>{navigate("/ngo-dashboard/ngo-home")}}>Join Now</Button>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 }
