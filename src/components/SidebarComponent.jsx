@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Home,
   ShoppingCart,
@@ -29,6 +29,10 @@ function SidebarComponent() {
   const [isOpen, setIsOpen] = useState(false); // Desktop Sidebar
   const [isMobileOpen, setIsMobileOpen] = useState(false); // Mobile Sidebar
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    navigate("/user-dashboard/user-home")
+  },[])
 
   return (
     <>

@@ -23,7 +23,7 @@ const router = createBrowserRouter(
             <Route path="user-home" element={<UserHome/>}/>
             <Route path="blog" element={<Blog/>}/>
             <Route path="article" element={<Article/>}/>
-            <Route path="pet-list" element={<PetList/>}/>
+            <Route path="pet-list/:category" element={<PetList/>}/>
             <Route path="requests" element={<RequestsUser/>}/>
             <Route path="marketplace" element={<UserMarketplace/>}/>
             <Route path="community" element={<Community/>}/>
