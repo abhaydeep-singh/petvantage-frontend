@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { UNSAFE_getSingleFetchDataStrategy } from "react-router-dom";
 const apiURL = import.meta.env.VITE_API_URL;
-
+const myId = sessionStorage.getItem("_id");
 // const initialRequests = [
 //   { id: 1, pet: "Buddy", ngo: "Happy Paws NGO", status: "Pending" },
 //   { id: 2, pet: "Charlie", ngo: "Rescue Me Foundation", status: "Approved" },
@@ -19,19 +18,22 @@ const apiURL = import.meta.env.VITE_API_URL;
 const RequestsUser = () => {
   // const [requests, setRequests] = useState(initialRequests);
   const [requests, setRequests] = useState([]);
+  const [triggerRender,setTriggerRender] = useState(true); // only for rerender purpose, in useEffect
   // const [request, setRequest] = useState([]);
 
 useEffect(()=>{
   // console.log("hi");
   fetchReqs();
   
-},[])
+},[triggerRender])
 
 const fetchReqs = async()=>{
-  let requestData = await axios.post(`${apiURL}/api/request/getall`)
-  // console.log(requestData.data.data) // gives array of objects
+  let requestData = await axios.post(`${apiURL}/api/request/getall`,{},{headers:{authorization:sessionStorage.getItem("token")}})
+  console.log(requestData.data.data) // gives array of objects
   
-    setRequests(requestData.data.data)
+    if(requestData.data.data){ //IMPORTANT: otherwise it will store undefined in requests which is eventually give massive errro
+      setRequests(requestData.data.data)
+    }
     // console.log(request)
   // adoptionStatus = requestData.data.data[0].adoptionStatus
   // desc = requestData.data.data[0].desc
@@ -41,8 +43,20 @@ const fetchReqs = async()=>{
 
   
 }
-  const handleCancel = (id) => {
-    setRequests(requests.filter((req) => req.id !== id));
+  const handleCancel = async(id,petid) => {
+    // setRequests(requests.filter((req) => req.id !== id));
+    try {
+      let response = await axios.post(`${apiURL}/api/request/delete`,{
+        reqID:id,
+        petID:petid
+      },{headers:{authorization:sessionStorage.getItem("token")}})
+      console.log(response);
+      if(response.data.success){
+        setTriggerRender(!triggerRender)
+      }
+    } catch (error) {
+      console.log("error while cancel API: ", error)
+    }
   };
 
   return (
@@ -57,7 +71,7 @@ const fetchReqs = async()=>{
 
         {requests.length > 0 ? (
           <div className="divide-y divide-gray-200">
-            {requests.map((req,index) => (
+            {requests.map((req,index) => myId === req.reqUserID._id ? (
               <div
                 key={index}
                 className="flex md:flex-row items-start md:items-center justify-between p-3"
@@ -69,19 +83,20 @@ const fetchReqs = async()=>{
                     className={`px-3 py-1 text-sm font-medium rounded-full ${
                       req.adoptionStatus === "pending" ? "bg-yellow-100 text-yellow-600" :
                       req.adoptionStatus === "approved" ? "bg-green-100 text-green-600" :
-                      "bg-red-100 text-red-600"
+                      "bg-red-100 text-red-600"                       
                     }`}
                   >
                     {req.adoptionStatus}
                   </span>
                   {req.adoptionStatus === "pending" && (
-                    <Button size="sm" onClick={() => handleCancel(index)}>
+                    <Button size="sm" onClick={() => handleCancel(req._id,req.petID)}>
                       Cancel
                     </Button>
                   )}
                 </div>
               </div>
-            ))}
+            ) : null
+            )}
           </div>
         ) : (
           <p className="text-center text-gray-500">No donation requests found.</p>

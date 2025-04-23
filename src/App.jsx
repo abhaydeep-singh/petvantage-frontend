@@ -1,8 +1,17 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import './App.css'
 import { Landing, UserDashboard } from './pages'
+import { useEffect } from 'react'
+
 function App() {
-  
+  const navigate = useNavigate();
+  useEffect(()=>{
+    let token = sessionStorage.getItem("token");
+    let userType = sessionStorage.getItem("userType");
+    if(!token){
+        navigate("/login")
+    }
+  },[])
 
   return (
    <>

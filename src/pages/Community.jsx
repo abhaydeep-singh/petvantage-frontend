@@ -1,7 +1,44 @@
 import { CommunityPost, CommunityPostInput } from "@/components";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+const apiURL = import.meta.env.VITE_API_URL;
+
+function getTimeAgo(dateString) {
+  const now = new Date();
+  const postDate = new Date(dateString);
+  const diffInSeconds = Math.floor((now - postDate) / 1000);
+
+  const minutes = Math.floor(diffInSeconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (diffInSeconds < 60) return "just now";
+  if (minutes < 60) return `${minutes}m ago`;
+  if (hours < 24) return `${hours}h ago`;
+  return `${days}d ago`;
+}
+
 
 function Community() {
+  const [posts,setPosts] = useState([])
+  useEffect(()=>{
+    fetchPosts()
+  },[])
+
+  async function fetchPosts(){
+    let response = await axios.post(`${apiURL}/api/post/get`,{},{
+      headers:{
+        authorization:sessionStorage.getItem("token")
+      }
+    });
+    console.log(response.data.data) // is an array
+    setPosts(response.data.data); // is an array
+    // console.log(response.data.data[1].addedBy.name)
+    // console.log(response.data.data[1].content)
+    // console.log(response.data.data[1].image) src
+    
+  };
+
   return (
     <div className={`w-full ${false ? "sm:ml-64" : "sm:ml-16"}`}>
       <div className="w-full ">
@@ -11,7 +48,7 @@ function Community() {
 
         <CommunityPostInput />
         <br />
-        <CommunityPost
+        {/* <CommunityPost
           post={{
             user: {
               name: "Abhaydeep Singh",
@@ -25,39 +62,27 @@ function Community() {
             reposts: 5,
             likes: 87,
           }}
-        />
-
-        <CommunityPost
-          post={{
-            user: {
-              name: "Abhaydeep Singh",
-              username: "abhaydev",
-              avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=hay",
-            },
-            time: "2h",
-            content: "Just launched my new project 🚀 Check it out!",
-            image: "https://api.dicebear.com/7.x/thumbs/svg?seed=r46",
-            comments: 12,
-            reposts: 5,
-            likes: 87,
-          }}
-        />
-
-        <CommunityPost
-          post={{
-            user: {
-              name: "Abhaydeep Singh",
-              username: "abhaydev",
-              avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=ghjk",
-            },
-            time: "2h",
-            content: "Just launched my new project 🚀 Check it out!",
-            image: "https://api.dicebear.com/7.x/thumbs/svg?seed=pp",
-            comments: 12,
-            reposts: 5,
-            likes: 87,
-          }}
-        />
+        /> */}
+        {posts.map((element,index)=>{
+          const timeAgo = getTimeAgo(element.createdAt);
+          return(
+           <CommunityPost key={index}
+           post={{
+             user: {
+               name: element.addedBy.name,
+               username: element.addedBy.username,
+               avatar: element.addedBy.image,
+             },
+             time: timeAgo,
+             content: element.content,
+             image: element.image,
+             comments: 12,
+             reposts: 5,
+             likes: 87,
+           }}
+         />)
+        })}
+        
       </div>
     </div>
   );

@@ -24,6 +24,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { ToastContainer, toast } from "react-toastify"
 
 function SidebarComponent() {
   const [isOpen, setIsOpen] = useState(false); // Desktop Sidebar
@@ -33,9 +34,42 @@ function SidebarComponent() {
   // useEffect(()=>{
   //   navigate("/user-dashboard/user-home")
   // },[])
+  function handleLogout(){
+  
+    toast.success('Logout Succesfull!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      // transition: Bounce,
+      });
+    console.log("logout");
+    
+    sessionStorage.clear();
+    setTimeout(() => {
+      navigate("/")
+    }, 1000);
+  }
 
   return (
     <>
+    <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        // transition={Bounce}
+      />
       <div className="relative">
         {/* Mobile Toggle Button */}
         <button
@@ -81,14 +115,14 @@ function SidebarComponent() {
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogTitle>Are you sure to Logout?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This will permanently delete your account and remove your data.
+                  You will have to login again using resgitered Email and Password.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction>Continue</AlertDialogAction>
+                  <AlertDialogAction onClick={()=>{handleLogout()}}>Continue</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -113,14 +147,14 @@ function SidebarComponent() {
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                      <AlertDialogTitle>Are you sure to Logout?</AlertDialogTitle>
                       <AlertDialogDescription>
-                        This will permanently delete your account and remove your data.
+                        You will have to login again using resgitered Email and Password.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction>Continue</AlertDialogAction>
+                      <AlertDialogAction onClick={()=>{handleLogout()}}>Continue</AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>

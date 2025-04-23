@@ -45,19 +45,25 @@ function Login() {
         email: data.email,
         password: data.password,
       });
-      console.log("response: ", response);
-      sessionStorage.setItem("token", response.data.token);
+      // console.log("response: ", response);
       const success = response.data.success;
       if (success == true) {
-        if (response.data.data.userType == 3) {
-          // navigate to user panel
-          console.log("logged in as user");
-
-          navigate("/user-dashboard/user-home");
-        } else if (response.data.data.userType == 2) {
-          // navigate to NGO panel
-          navigate("/ngo-dashboard/ngo-home");
-        }
+        sessionStorage.setItem("token", response.data.token);
+        sessionStorage.setItem("_id", response.data.data._id);
+        sessionStorage.setItem("name", response.data.data.name);
+        sessionStorage.setItem("email", response.data.data.email);
+        sessionStorage.setItem("userType", response.data.data.userType);
+        sessionStorage.setItem("image",response.data.data.image);
+        sessionStorage.setItem("username",response.data.data.username);
+      }
+      if (response.data.data.userType == 3) {
+        // navigate to user panel
+        console.log("logged in as user");
+        navigate("/user-dashboard/user-home");
+      }
+      else if (response.data.data.userType == 2) {
+        // navigate to NGO panel
+        navigate("/ngo-dashboard/ngo-home");
       }
 
       resetLogin();
