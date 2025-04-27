@@ -21,10 +21,10 @@ function Navbar() {
       {/* Desktop menu */}
       <nav className='hidden md:flex space-x-6'>
         <Button variant="default" onClick={() => handleNavigate('/')}>Home</Button>
-        <Button variant="ghost">About Us</Button>
-        <Button variant="ghost">Sign Up</Button>
-        <Button variant="ghost">Contact Us</Button>
-        <Button variant="ghost" onClick={() => handleNavigate('/login')}>Login</Button>
+        <Button variant="ghost" onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}>About Us</Button>
+        <Button variant="ghost" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>Contact Us</Button>
+        <Button variant="ghost" onClick={() => handleNavigate('/login/register')}>Sign Up</Button>
+        <Button variant="ghost" onClick={() => handleNavigate('/login/login')}>Login</Button>
       </nav>
 
       {/* Mobile hamburger */}
@@ -42,19 +42,27 @@ function Navbar() {
               Home
             </Button>
           </li>
+
           <li>
-            <Button variant="ghost" className="w-3/4" onClick={() => setMenuOpen(false)}>
-              About Us
+            <Button variant="ghost" className="w-3/4" onClick={() => {
+              setMenuOpen(false)
+              document.getElementById('about').scrollIntoView({ behavior: 'smooth' })
+            }}>
+              About US
             </Button>
           </li>
+          <li>
+            <Button variant="ghost" className="w-3/4" onClick={() => {
+              setMenuOpen(false)
+              document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })
+            }}>
+              Contact Us
+            </Button>
+          </li>
+
           <li>
             <Button variant="ghost" className="w-3/4" onClick={() => setMenuOpen(false)}>
               Sign Up
-            </Button>
-          </li>
-          <li>
-            <Button variant="ghost" className="w-3/4" onClick={() => setMenuOpen(false)}>
-              Contact Us
             </Button>
           </li>
           <li>

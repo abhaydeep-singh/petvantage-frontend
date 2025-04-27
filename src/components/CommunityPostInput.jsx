@@ -67,7 +67,7 @@ export default function CommunityPostInput() {
           draggable: true,
           progress: undefined,
           theme: "dark",
-          transition: Bounce,
+          // transition: Bounce,
           });
       }
     } catch (error) {
