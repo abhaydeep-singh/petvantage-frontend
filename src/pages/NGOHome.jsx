@@ -1,11 +1,14 @@
 import { DonationChart } from '@/components'
 import { Button } from '@/components/ui/button'
-import React from 'react'
+import { Separator } from '@/components/ui/separator'
+import { AddPet } from '@/components/NGO/AddPet'
+import React, { useState } from 'react'
 
 function NGOHome() {
+  const [open, setOpen] = useState(false)
   return (
     // sm:ml-64 is open
-    <div className={`w-full h-screen ${false ? "sm:ml-64" : "sm:ml-16"}`}> 
+    <div className={`w-full h-screen ${false ? "sm:ml-64" : "sm:ml-16"}`}>
     <div className="hero relative h-[40vh] w-full border flex items-center justify-center bg-cover bg-center"
      style={{
             backgroundImage: `url(/images/cat.jpg)`,
@@ -21,9 +24,17 @@ function NGOHome() {
         <h2 className='text-2xl'>🐾 Manage Adoptions Efficiently</h2>
         {/* <br /> */}
         <p className='text-sm'>Track pet adoption progress, update statuses, and ensure every pet finds a loving home. Take action with just a click!</p>
+        <div className='flex gap-2'>
         <Button>Manage Adoptions</Button>
+        <Button onClick={() => setOpen(true)}>Add Pet</Button>
+        <AddPet open={open} setOpen={setOpen} />
+        <Button>Show Pets</Button>
+        </div>
       </div>
       </div>
+
+      {/* <Separator className="my-7"/>   */}
+
 
     {/* Pet Marketplace Management */}
 

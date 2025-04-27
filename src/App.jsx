@@ -5,13 +5,13 @@ import { useEffect } from 'react'
 
 function App() {
   const navigate = useNavigate();
-  useEffect(()=>{
-    let token = sessionStorage.getItem("token");
-    let userType = sessionStorage.getItem("userType");
-    if(!token){
-        navigate("/login")
-    }
-  },[])
+  // useEffect(()=>{
+  //   let token = sessionStorage.getItem("token");
+  //   let userType = sessionStorage.getItem("userType");
+  //   if(!token){
+  //       navigate("/login")
+  //   }
+  // },[])
 
   return (
    <>

@@ -20,7 +20,7 @@ import { Button } from "../ui/button";
 function ProductCard() {
   return (
     <div>
-      <Card className="w-[190px] bg-accent md:w-[270px] md:h-[53vh]">
+      <Card className="w-[190px] bg-accent md:w-[270px]">
       
       <CardContent className="p-0">
         <div className="flex justify-center">
