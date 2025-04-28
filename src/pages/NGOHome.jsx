@@ -3,9 +3,11 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { AddPet } from '@/components/NGO/AddPet'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function NGOHome() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     // sm:ml-64 is open
     <div className={`w-full h-screen ${false ? "sm:ml-64" : "sm:ml-16"}`}>
@@ -25,10 +27,11 @@ function NGOHome() {
         {/* <br /> */}
         <p className='text-sm'>Track pet adoption progress, update statuses, and ensure every pet finds a loving home. Take action with just a click!</p>
         <div className='flex gap-2'>
-        <Button>Manage Adoptions</Button>
+          {/* Absolute vs relative path */}
+        <Button onClick={()=>{navigate("/ngo-dashboard/requests")}}>Manage Adoptions</Button>
         <Button onClick={() => setOpen(true)}>Add Pet</Button>
         <AddPet open={open} setOpen={setOpen} />
-        <Button>Show Pets</Button>
+        <Button onClick={()=>{navigate("/ngo-dashboard/pets")}}>Show Pets</Button>
         </div>
       </div>
       </div>

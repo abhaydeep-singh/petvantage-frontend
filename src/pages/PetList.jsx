@@ -65,7 +65,7 @@ const PetList = () => {
     <div className="p-6 mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-center">Available Pets for Adoption</h2>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {pets.map((pet,index) => (
+        {pets.length > 0 ? pets.map((pet,index) => (
           <Card key={index} className="p-4 flex flex-col items-center text-center">
             <img src={pet.image} alt={pet.name} className="w-40 h-40 rounded-lg object-cover border" />
             <h3 className="text-lg font-semibold mt-3">{pet.name}</h3>
@@ -78,7 +78,7 @@ const PetList = () => {
             
 
           </Card>
-        ))}
+        )) : null}
       </div>
     </div>
   );

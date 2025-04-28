@@ -7,55 +7,86 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/components/ui/alert-dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectItem,
   SelectContent,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { useState } from "react"
+} from "@/components/ui/select";
+import { useState } from "react";
+import axios from "axios";
+import { ClipLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+
+const apiURL = import.meta.env.VITE_API_URL;
 
 export function AddPet({ open, setOpen }) {
-  const [petName, setPetName] = useState("")
-  const [breed, setBreed] = useState("")
-  const [category, setCategory] = useState("")
-  const [description, setDescription] = useState("")
-  const [image, setImage] = useState(null)
-  const [previewUrl, setPreviewUrl] = useState(null)
+  const [petName, setPetName] = useState("");
+  const [breed, setBreed] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const breedOptions = {
     dog: ["Labrador", "Bulldog", "Beagle", "German Shepherd"],
     cat: ["Persian", "Siamese", "Maine Coon", "Bengal"],
     rabbit: ["Holland Lop", "Netherland Dwarf", "Flemish Giant"],
     bird: ["Parrot", "Cockatiel", "Canary", "Budgie"],
-  }
+  };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
-      setImage(file)
-      setPreviewUrl(URL.createObjectURL(file))
+      setImage(file);
+      setPreviewUrl(URL.createObjectURL(file));
     }
-  }
+  };
 
-  const handleSubmit = () => {
-    console.log({
-      petName,
-      breed,
-      category,
-      description,
-      image,
-    })
-    setOpen(false)
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("name", petName);
+      formData.append("breed", breed);
+      formData.append("category", category);
+      formData.append("image", image);
+      formData.append("desc", description);
+
+      let response = await axios.post(`${apiURL}/api/pet/add`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          authorization: sessionStorage.getItem("token"),
+        },
+      });
+
+      console.log(response);
+
+      if (response.data.success) {
+        toast.success("Pet Added Successfully!", { theme: "dark" });
+        setOpen(false);
+      } else {
+        toast.warn(`Error while adding pet: ${response.data.message}`, { theme: "dark" });
+      }
+    } catch (error) {
+      console.log("Error while Adding Pet: ", error);
+      toast.error("Something went wrong while adding pet", { theme: "dark" });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
+      <ToastContainer />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Add New Pet</AlertDialogTitle>
@@ -102,8 +133,8 @@ export function AddPet({ open, setOpen }) {
             <Select
               value={category}
               onValueChange={(val) => {
-                setCategory(val)
-                setBreed("")
+                setCategory(val);
+                setBreed("");
               }}
             >
               <SelectTrigger className="col-span-3" id="category">
@@ -118,7 +149,7 @@ export function AddPet({ open, setOpen }) {
             </Select>
           </div>
 
-          {/* Breed - shown only if category is selected */}
+          {/* Breed */}
           {category && (
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="breed" className="text-right">Breed</Label>
@@ -152,9 +183,13 @@ export function AddPet({ open, setOpen }) {
 
         <AlertDialogFooter>
           <AlertDialogCancel onClick={() => setOpen(false)}>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleSubmit}>Add Pet</AlertDialogAction>
+          {loading ? (
+            <ClipLoader color="#FACC15" />
+          ) : (
+            <AlertDialogAction onClick={(e) => handleSubmit(e)}>Add Pet</AlertDialogAction>
+          )}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  );
 }

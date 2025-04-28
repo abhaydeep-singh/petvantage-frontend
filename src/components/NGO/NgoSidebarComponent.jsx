@@ -8,7 +8,7 @@ import {
   Menu,
   ChevronLeft,
   ChevronRight,
-  LogOut
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
@@ -24,14 +24,48 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { ToastContainer, toast } from "react-toastify";
 
 function NgoSidebarComponent() {
   const [isOpen, setIsOpen] = useState(false); // Desktop Sidebar
   const [isMobileOpen, setIsMobileOpen] = useState(false); // Mobile Sidebar
   const navigate = useNavigate();
 
+  function handleLogout() {
+    toast.success("Logout Succesfull!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      // transition: Bounce,
+    });
+    console.log("logout");
+
+    sessionStorage.clear();
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
+  }
+
   return (
     <>
+    <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            // transition={Bounce}
+          />
       <div className="relative">
         {/* Mobile Toggle Button */}
         <button
@@ -66,28 +100,64 @@ function NgoSidebarComponent() {
           </h2>
 
           <nav className="mt-14 space-y-4 flex flex-col items-start">
-            <SidebarItem icon={<Home />} text="Home" onClick={() => navigate("/ngo-dashboard/ngo-home")} showText={isOpen} />
-            <SidebarItem icon={<SquareCheck />} text="Manage Requests" onClick={() => navigate("/ngo-dashboard/requests")} showText={isOpen} />
-            <SidebarItem icon={<ShoppingCart />} text="Marketplace" onClick={() => navigate("/ngo-dashboard/marketplace")} showText={isOpen} />
-            <SidebarItem icon={<MessageSquare />} text="Community"  onClick={() => navigate("/ngo-dashboard/community")} showText={isOpen} />
-            <SidebarItem icon={<FileText />} text="Blog" onClick={() => navigate("/ngo-dashboard/blog")} showText={isOpen} />
+            <SidebarItem
+              icon={<Home />}
+              text="Home"
+              onClick={() => navigate("/ngo-dashboard/ngo-home")}
+              showText={isOpen}
+            />
+            <SidebarItem
+              icon={<SquareCheck />}
+              text="Manage Requests"
+              onClick={() => navigate("/ngo-dashboard/requests")}
+              showText={isOpen}
+            />
+            <SidebarItem
+              icon={<ShoppingCart />}
+              text="Marketplace"
+              onClick={() => navigate("/ngo-dashboard/marketplace")}
+              showText={isOpen}
+            />
+            <SidebarItem
+              icon={<MessageSquare />}
+              text="Community"
+              onClick={() => navigate("/ngo-dashboard/community")}
+              showText={isOpen}
+            />
+            <SidebarItem
+              icon={<FileText />}
+              text="Blog"
+              onClick={() => navigate("/ngo-dashboard/blog")}
+              showText={isOpen}
+            />
             <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <SidebarItem icon={<LogOut />} text="Logout" showText={isOpen} />
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This will permanently delete your account and remove your data.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction>Continue</AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <SidebarItem
+                              icon={<LogOut />}
+                              text="Logout"
+                              showText={isOpen}
+                            />
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you sure to Logout?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                You will have to login again using resgitered Email and
+                                Password.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={() => {
+                                  handleLogout();
+                                }}
+                              >
+                                Continue
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
           </nav>
         </div>
 
@@ -98,25 +168,58 @@ function NgoSidebarComponent() {
               <h2 className="text-xl font-bold">🐾 User Dashboard</h2>
 
               <nav className="mt-14 space-y-4 flex flex-col items-start">
-                <SidebarItem icon={<Home />} text="Home" onClick={() => navigate("/ngo-dashboard/ngo-home")} showText />
-                <SidebarItem icon={<SquareCheck />} text="View Requests" onClick={() => navigate("/ngo-dashboard/requests")} showText />
-                <SidebarItem icon={<ShoppingCart />} text="Marketplace" onClick={() => navigate("/ngo-dashboard/marketplace")} showText />
-                <SidebarItem icon={<MessageSquare />} text="Community" showText />
-                <SidebarItem icon={<FileText />} text="Blog" onClick={() => navigate("/ngo-dashboard/blog")} showText />
+                <SidebarItem
+                  icon={<Home />}
+                  text="Home"
+                  onClick={() => navigate("/ngo-dashboard/ngo-home")}
+                  showText
+                />
+                <SidebarItem
+                  icon={<SquareCheck />}
+                  text="View Requests"
+                  onClick={() => navigate("/ngo-dashboard/requests")}
+                  showText
+                />
+                <SidebarItem
+                  icon={<ShoppingCart />}
+                  text="Marketplace"
+                  onClick={() => navigate("/ngo-dashboard/marketplace")}
+                  showText
+                />
+                <SidebarItem
+                  icon={<MessageSquare />}
+                  text="Community"
+                  showText
+                />
+                <SidebarItem
+                  icon={<FileText />}
+                  text="Blog"
+                  onClick={() => navigate("/ngo-dashboard/blog")}
+                  showText
+                />
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <SidebarItem icon={<LogOut />} text="Logout" showText />
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                      <AlertDialogTitle>
+                        Are you sure to Logout?
+                      </AlertDialogTitle>
                       <AlertDialogDescription>
-                        This will permanently delete your account and remove your data.
+                        You will have to login again using resgitered Email and
+                        Password.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction>Continue</AlertDialogAction>
+                      <AlertDialogAction
+                        onClick={() => {
+                          handleLogout();
+                        }}
+                      >
+                        Continue
+                      </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>

@@ -13,109 +13,31 @@ const myID = sessionStorage.getItem("_id")
 const ManageRequests = () => {
   const [requests,setRequests] = useState([]);
   const [trigger,setTrigger] = useState(true);
-  const adoptionRequests = [
-    {
-      id: 1,
-      petName: "Bruno",
-      user: { name: "Abhay", email: "abhay@example.com", phone: "9876543210" },
-    },
-    {
-      id: 2,
-      petName: "Lucy",
-      user: { name: "Nikki", email: "nikki@example.com", phone: "9123456780" },
-    },
-    {
-        id: 1,
-        petName: "Bruno",
-        user: { name: "Abhay", email: "abhay@example.com", phone: "9876543210" },
-      },
-      {
-        id: 2,
-        petName: "Lucy",
-        user: { name: "Nikki", email: "nikki@example.com", phone: "9123456780" },
-      },
-      {
-        id: 1,
-        petName: "Bruno",
-        user: { name: "Abhay", email: "abhay@example.com", phone: "9876543210" },
-      },
-      {
-        id: 2,
-        petName: "Lucy",
-        user: { name: "Nikki", email: "nikki@example.com", phone: "9123456780" },
-      },
-      {
-        id: 1,
-        petName: "Bruno",
-        user: { name: "Abhay", email: "abhay@example.com", phone: "9876543210" },
-      },
-      {
-        id: 2,
-        petName: "Lucy",
-        user: { name: "Nikki", email: "nikki@example.com", phone: "9123456780" },
-      },
-    // Add more requests as needed
-  ]
-
-  const adoptionHistory = [
-    {
-      id: 11,
-      petName: "Simba",
-      user: { name: "Raj", email: "raj@example.com" },
-      status: "Approved",
-    },
-    {
-      id: 12,
-      petName: "Milo",
-      user: { name: "Anya", email: "anya@example.com" },
-      status: "Rejected",
-    },
-    {
-        id: 11,
-        petName: "Simba",
-        user: { name: "Raj", email: "raj@example.com" },
-        status: "Approved",
-      },
-      {
-        id: 12,
-        petName: "Milo",
-        user: { name: "Anya", email: "anya@example.com" },
-        status: "Rejected",
-      },
-      {
-        id: 11,
-        petName: "Simba",
-        user: { name: "Raj", email: "raj@example.com" },
-        status: "Approved",
-      },
-      {
-        id: 12,
-        petName: "Milo",
-        user: { name: "Anya", email: "anya@example.com" },
-        status: "Rejected",
-      },
-
-  ]
 
   async function fetchRequests(){
-    let response = await axios.post(`${apiURL}/api/request/getall`,{},{
-      headers:{
-        authorization:sessionStorage.getItem("token")
-      }
-    })
-    setRequests(response.data.data)
-    // console.log(response.data.data);
-    
-    // console.log(response.data.data[0].petID.addedByID._id === myID ? "matched" : "False");
-
-    // console.log(response.data.data[0].petID.addedByID._id, myID);
+    try {
+      let response = await axios.post(`${apiURL}/api/request/getall`,{},{
+        headers:{
+          authorization:sessionStorage.getItem("token")
+        }
+      })
+      setRequests(response.data.data)
+      // console.log(response.data.data);
+      // console.log(response.data.data[0].petID.addedByID._id === myID ? "matched" : "False");
+      // console.log(response.data.data[0].petID.addedByID._id, myID);
+    } catch (error) {
+      console.log("Something went wrong while fething Requests: ",error)
+    }
     
   };
 
 
-    useEffect(()=>{
-      fetchRequests()
-    },[trigger])
+  useEffect(() => { //UseEffect cannot be async itself, coz it do now return a promise, instead it return a cleanup function
+    const getRequests = async () => { //IMPORTANT to declare it in await coz that fn in async, otherwise react quickly move on without waiting to fetch 
+      await fetchRequests()
+    }
+    getRequests()
+  }, [trigger])
 
 
   async function handleRequest(id,status){

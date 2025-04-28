@@ -14,7 +14,8 @@ import Login from "./Login";
 import AdminDashboard from "./AdminDashboard";
 import AdminHome from "./AdminHome";
 import RegisterNGO from "./RegisterNGO";
+import ShowPets from "./ShowPets";
 
 // import UserBlog from "./UserBlog";
 
-export {Landing, UserDashboard,UserHome,Blog,Article,PetList,RequestsUser,NGODashboard, ManageMarketplace, UserMarketplace, Community, ManageRequests, Login, AdminDashboard,AdminHome, RegisterNGO};
+export {Landing, UserDashboard,UserHome,Blog,Article,PetList,RequestsUser,NGODashboard, ManageMarketplace, UserMarketplace, Community, ManageRequests, Login, AdminDashboard,AdminHome, RegisterNGO, ShowPets};
