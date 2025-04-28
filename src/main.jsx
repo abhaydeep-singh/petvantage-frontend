@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { Article, Blog, Community, Landing, ManageMarketplace, ManageRequests, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome, UserMarketplace, Login } from "./pages";
+import { Article, Blog, Community, Landing, ManageMarketplace, ManageRequests, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome, UserMarketplace, Login, AdminDashboard, AdminHome, RegisterNGO } from "./pages";
 import App from "./App.jsx";
 import {
   Route,
@@ -20,6 +20,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route path="" element={<Landing />} />
       <Route path="login/:action" element={<Login/>}></Route>
+      <Route path="ngo-register" element={<RegisterNGO/>}></Route>
       <Route path="user-dashboard" element={<UserDashboard />}>
             <Route path="user-home" element={<UserHome/>}/>
             <Route path="blog" element={<Blog/>}/>
@@ -38,10 +39,10 @@ const router = createBrowserRouter(
             <Route path="blog" element={<Blog/>}/>
             <Route path="community" element={<Community/>}/>
             <Route path="requests" element={<ManageRequests/>}/>
-
-            
       </Route>
-      {/* <Route path='contact' element={<Contact />} /> */}
+      <Route path="admin" element={<AdminDashboard/>}>
+            <Route path="admin-home" element={<AdminHome/>}/>
+      </Route>
     </Route>
   )
 );

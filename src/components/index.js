@@ -10,4 +10,5 @@ import ParticlesBackground from "./ParticlesBackground.jsx";
 import CommunityPost from "./CommunityPost.jsx";
 import CommunityPostInput from "./CommunityPostInput.jsx";
 import { AddProduct } from "./NGO/AddProduct.jsx";
-export {Navbar, SidebarComponent, FeaturedArticles, NgoSidebarComponent, DonationChart, ProductCard, Product, TrustedBy,ParticlesBackground, CommunityPost, CommunityPostInput, AddProduct};
+import AdminSidebar from "./Admin/AdminSidebar.jsx";
+export {Navbar, SidebarComponent, FeaturedArticles, NgoSidebarComponent, DonationChart, ProductCard, Product, TrustedBy,ParticlesBackground, CommunityPost, CommunityPostInput, AddProduct, AdminSidebar};

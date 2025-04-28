@@ -378,8 +378,10 @@ function Login() {
 
       </CardContent>
       <CardFooter>
+      <div className="flex w-full justify-around">
       {loading ? <ClipLoader color="#FACC15" /> : <Button type="submit">Register</Button>}
-        
+      <div className="text-primary hover:underline" onClick={()=>navigate("/ngo-register")}>NGO? Register here</div>
+      </div>
       </CardFooter>
     </Card>
   </form>

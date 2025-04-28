@@ -11,7 +11,10 @@ import UserMarketplace from "./UserMarketplace";
 import Community from "./Community";
 import ManageRequests from "./ManageRequests";
 import Login from "./Login";
+import AdminDashboard from "./AdminDashboard";
+import AdminHome from "./AdminHome";
+import RegisterNGO from "./RegisterNGO";
 
 // import UserBlog from "./UserBlog";
 
-export {Landing, UserDashboard,UserHome,Blog,Article,PetList,RequestsUser,NGODashboard, ManageMarketplace, UserMarketplace, Community, ManageRequests, Login};
+export {Landing, UserDashboard,UserHome,Blog,Article,PetList,RequestsUser,NGODashboard, ManageMarketplace, UserMarketplace, Community, ManageRequests, Login, AdminDashboard,AdminHome, RegisterNGO};

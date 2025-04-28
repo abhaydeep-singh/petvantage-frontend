@@ -35,7 +35,8 @@ function Navbar() {
       </div>
 
       {/* Mobile dropdown menu */}
-      <nav className={`absolute top-[10vh] right-0 w-full bg-background shadow-md transition-all duration-300 ease-in-out md:hidden ${menuOpen ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0 overflow-hidden'}`}>
+      <nav className={`absolute top-[10vh] right-0 w-full bg-background z-20 shadow-md transition-all duration-300 ease-in-out md:hidden ${menuOpen ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0 overflow-hidden'}`}>
+
         <ul className='flex flex-col items-center py-4 space-y-4'>
           <li>
             <Button variant="default" className="w-3/4" onClick={() => handleNavigate('/')}>

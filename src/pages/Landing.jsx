@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import dog from "../assets/images/dog1.jpg";
-import aboutus from "../assets/images/aboutus.jpg"; // <- New image for About Us
+import aboutus from "../assets/images/aboutus.jpg";
 import shopkeeper from "../assets/svg/shopkeeper.svg";
 import fish from "../assets/svg/fish.svg";
 import tips from "../assets/svg/tips.svg";
@@ -136,8 +136,8 @@ function Landing() {
             </p>
           </div>
           <div className="flex gap-4 text-sm">
-            {/* <Link href="#" className="hover:underline">About Us</Link>
-            <Link href="#" className="hover:underline">Contact Us</Link> */}
+            {/* <Link on className="hover:underline">Register As NGO</Link> */}
+            {/* <Link href="#" className="hover:underline">Contact Us</Link> */}
           </div>
         </div>
       </footer>
