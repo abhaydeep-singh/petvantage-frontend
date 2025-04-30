@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { Article, Blog, Community, Landing, ManageMarketplace, ManageRequests, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome, UserMarketplace, Login, AdminDashboard, AdminHome, RegisterNGO, ShowPets } from "./pages";
+import { Article, Blog, Community, Landing, ManageMarketplace, ManageRequests, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome, UserMarketplace, Login, AdminDashboard, AdminHome, RegisterNGO, ShowPets, AdminRequests, AdminShowPets } from "./pages";
 import App from "./App.jsx";
 import {
   Route,
@@ -44,6 +44,8 @@ const router = createBrowserRouter(
       </Route>
       <Route path="admin" element={<AdminDashboard/>}>
             <Route path="admin-home" element={<AdminHome/>}/>
+            <Route path="requests" element={<AdminRequests/>}/>
+            <Route path="pets" element={<AdminShowPets/>}/>
       </Route>
     </Route>
   )

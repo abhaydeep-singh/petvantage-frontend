@@ -82,7 +82,7 @@ function Login() {
             // navigate to NGO panel
             navigate("/ngo-dashboard/ngo-home");
           }
-          else if (response.data.data.userType == 1) {
+          else  {
             // navigate to admin panel
             navigate("/admin/admin-home");
           }

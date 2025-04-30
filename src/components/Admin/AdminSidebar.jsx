@@ -104,9 +104,9 @@ function AdminSidebar() {
           </h2>
 
           <nav className="mt-14 space-y-4 flex flex-col items-start">
-            <SidebarItem icon={<Home />} text="Home" onClick={() => navigate("/user-dashboard/user-home")} showText={isOpen} />
-            <SidebarItem icon={<SquareCheck />} text="View Requests" onClick={() => navigate("/user-dashboard/requests")} showText={isOpen} />
-            <SidebarItem icon={<ShoppingCart />} text="Marketplace" onClick={() => navigate("/user-dashboard/marketplace")} showText={isOpen} />
+            <SidebarItem icon={<Home />} text="Home" onClick={() => navigate("/admin/admin-home")} showText={isOpen} />
+            <SidebarItem icon={<SquareCheck />} text="Monitor all Requests" onClick={() => navigate("/admin/requests")} showText={isOpen} />
+            <SidebarItem icon={<SquareCheck />} text="Monitor all Pets" onClick={() => navigate("/admin/pets")} showText={isOpen} />
             <SidebarItem icon={<MessageSquare />} text="Community"  onClick={() => navigate("/user-dashboard/community")} showText={isOpen} />
             <SidebarItem icon={<FileText />} text="Blog" onClick={() => navigate("/user-dashboard/blog")} showText={isOpen} />
             <AlertDialog>
@@ -137,8 +137,8 @@ function AdminSidebar() {
 
               <nav className="mt-14 space-y-4 flex flex-col items-start">
                 <SidebarItem icon={<Home />} text="Home" onClick={() => navigate("/user-dashboard/user-home")} showText />
-                <SidebarItem icon={<SquareCheck />} text="View Requests" onClick={() => navigate("/user-dashboard/requests")} showText />
-                <SidebarItem icon={<ShoppingCart />} text="Marketplace" onClick={() => navigate("/user-dashboard/marketplace")} showText />
+                <SidebarItem icon={<SquareCheck />} text="Monitor all Requests" onClick={() => navigate("/admin/requests")} showText />
+                <SidebarItem icon={<SquareCheck />} text="Monitor all Pets" onClick={() => navigate("/admin/pets")} showText />
                 <SidebarItem icon={<MessageSquare />} text="Community" showText />
                 <SidebarItem icon={<FileText />} text="Blog" onClick={() => navigate("/user-dashboard/blog")} showText />
                 <AlertDialog>

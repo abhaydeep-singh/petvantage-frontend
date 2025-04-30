@@ -15,7 +15,7 @@ const myId = sessionStorage.getItem("_id");
 //   { id: 9, pet: "Bella", ngo: "Safe Haven Pets", status: "Rejected" },
 // ];
 
-const RequestsUser = () => {
+const AdminRequests = () => {
   // const [requests, setRequests] = useState(initialRequests);
   const [requests, setRequests] = useState([]);
   const [triggerRender,setTriggerRender] = useState(true); // only for rerender purpose, in useEffect
@@ -23,10 +23,7 @@ const RequestsUser = () => {
 
 useEffect(()=>{
   // console.log("hi");
-  const getRequest = async()=>{
-    fetchReqs();
-  }
-  getRequest();
+  fetchReqs();
   
 },[triggerRender])
 
@@ -74,7 +71,7 @@ const fetchReqs = async()=>{
 
         {requests.length > 0 ? (
           <div className="divide-y divide-gray-200">
-            {requests.map((req, index) => (req.reqUserID && myId === req.reqUserID._id) ? (
+            {requests.map((req,index) =>  (
               <div
                 key={index}
                 className="flex md:flex-row items-start md:items-center justify-between p-3"
@@ -98,7 +95,7 @@ const fetchReqs = async()=>{
                   )}
                 </div>
               </div>
-            ) : null
+            ) 
             )}
           </div>
         ) : (
@@ -109,4 +106,4 @@ const fetchReqs = async()=>{
   );
 };
 
-export default RequestsUser;
+export default AdminRequests;
