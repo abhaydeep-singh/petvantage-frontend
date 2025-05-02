@@ -112,12 +112,12 @@ function NgoSidebarComponent() {
               onClick={() => navigate("/ngo-dashboard/requests")}
               showText={isOpen}
             />
-            <SidebarItem
+            {/* <SidebarItem
               icon={<ShoppingCart />}
               text="Marketplace"
               onClick={() => navigate("/ngo-dashboard/marketplace")}
               showText={isOpen}
-            />
+            /> */}
             <SidebarItem
               icon={<MessageSquare />}
               text="Community"
