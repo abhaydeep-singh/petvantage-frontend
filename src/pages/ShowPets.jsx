@@ -54,7 +54,7 @@ function ShowPets() {
 
         <div className="flex flex-wrap gap-4">
           {/* Filter by Category */}
-          <Select onValueChange={setCategoryFilter}>
+          {/* <Select onValueChange={setCategoryFilter}>
             <SelectTrigger className="w-[150px]">
               <SelectValue placeholder="Filter Category" />
             </SelectTrigger>
@@ -64,10 +64,10 @@ function ShowPets() {
               <SelectItem value="cat">Cats</SelectItem>
               <SelectItem value="bird">Birds</SelectItem>
             </SelectContent>
-          </Select>
+          </Select> */}
 
           {/* Sort Option */}
-          <Select onValueChange={setSortOption}>
+          {/* <Select onValueChange={setSortOption}>
             <SelectTrigger className="w-[150px]">
               <SelectValue placeholder="Sort By" />
             </SelectTrigger>
@@ -75,7 +75,7 @@ function ShowPets() {
               <SelectItem value="category">Category</SelectItem>
               <SelectItem value="breed">Breed</SelectItem>
             </SelectContent>
-          </Select>
+          </Select> */}
 
           {/* Toggle View */}
           <Button variant="outline" onClick={() => setViewMode(viewMode === "card" ? "table" : "card")}>
