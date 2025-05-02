@@ -130,6 +130,12 @@ function NgoSidebarComponent() {
               onClick={() => navigate("/ngo-dashboard/blog")}
               showText={isOpen}
             />
+            <SidebarItem
+              icon={<FileText />}
+              text="Add Blog"
+              onClick={() => navigate("/ngo-dashboard/editor")}
+              showText={isOpen}
+            />
             <AlertDialog>
                           <AlertDialogTrigger asChild>
                             <SidebarItem
