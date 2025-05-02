@@ -15,42 +15,40 @@ function Landing() {
       <ParticlesBackground />
       <Navbar />
 
+      {/* Hero Section */}
+      <div className="relative flex flex-col md:flex-row md:justify-center md:gap-8 md:items-center h-auto md:h-[70vh] w-full px-4 pt-20 md:pt-0 border-t overflow-hidden">
+        {/* Background Blob */}
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 md:left-auto md:right-10 md:top-1/2 md:-translate-y-1/2 z-0">
+          <div className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-primary/20 blur-3xl rounded-full"></div>
+        </div>
 
-    {/* Hero Section */}
-    <div className="relative flex flex-col md:flex-row md:justify-center md:gap-8 md:items-center h-auto md:h-[70vh] w-full px-4 pt-20 md:pt-0 border-t overflow-hidden">
-      
-      {/* Background Blob */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 md:left-auto md:right-10 md:top-1/2 md:-translate-y-1/2 z-0">
-        <div className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-primary/20 blur-3xl rounded-full"></div>
-      </div>
+        {/* Text Content */}
+        <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 text-foreground z-10">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary leading-tight">
+            FIND YOUR <br className="hidden md:block" />
+            PERFECT PET <br className="hidden md:block" />
+            COMPANION TODAY
+          </h1>
+          <p className="text-muted-foreground text-lg md:text-xl">
+            Adopt/Buy and Care All in One Place
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            {/* <Button variant="outline">Browse Pets</Button> */}
+            <Button onClick={() => navigate("/login/register")}>
+              Join Now
+            </Button>
+          </div>
+        </div>
 
-      {/* Text Content */}
-      <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 text-foreground z-10">
-        <h1 className="text-4xl md:text-5xl font-bold text-primary leading-tight">
-          FIND YOUR <br className="hidden md:block" />
-          PERFECT PET <br className="hidden md:block" />
-          COMPANION TODAY
-        </h1>
-        <p className="text-muted-foreground text-lg md:text-xl">
-          Adopt/Buy and Care All in One Place
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Button variant="outline">Browse Pets</Button>
-          <Button>Join Now</Button>
+        {/* Image */}
+        <div className="mt-8 md:mt-0 md:w-[35%] flex justify-center z-10">
+          <img
+            src={dog}
+            className="rounded-2xl w-[80%] md:w-full"
+            alt="Cute dog"
+          />
         </div>
       </div>
-
-      {/* Image */}
-      <div className="mt-8 md:mt-0 md:w-[35%] flex justify-center z-10">
-        <img
-          src={dog}
-          className="rounded-2xl w-[80%] md:w-full"
-          alt="Cute dog"
-        />
-      </div>
-    </div>
-
-
 
       {/* Why Choose Us Section */}
       <div className="flex flex-col gap-6 w-full py-8 md:my-6">
@@ -80,7 +78,10 @@ function Landing() {
       </div>
 
       {/* About Us Section */}
-      <div id="about" className="flex flex-col md:flex-row items-center justify-center gap-8 w-full py-12 md:py-16 lg:py-20 px-4 border-t">
+      <div
+        id="about"
+        className="flex flex-col md:flex-row items-center justify-center gap-8 w-full py-12 md:py-16 lg:py-20 px-4 border-t"
+      >
         <div className="md:w-[40%] border rounded-2xl overflow-hidden">
           <img
             src={aboutus}
@@ -93,38 +94,50 @@ function Landing() {
             About Us
           </h2>
           <p className="text-base xl:text-lg leading-relaxed text-muted-foreground">
-            At PetVantage, we are passionate about connecting loving families with their perfect pet companions. 
-            Whether you're looking to adopt, buy, or simply learn more about pet care, our platform is designed to 
-            make your journey seamless and joyful. Trusted by top NGOs, we aim to build a strong, caring community 
-            for pets and their future owners.
+            At PetVantage, we are passionate about connecting loving families
+            with their perfect pet companions. Whether you're looking to adopt,
+            buy, or simply learn more about pet care, our platform is designed
+            to make your journey seamless and joyful. Trusted by top NGOs, we
+            aim to build a strong, caring community for pets and their future
+            owners.
           </p>
         </div>
       </div>
-
 
       <h2 className="text-2xl lg:text-4xl font-semibold text-center my-8 text-primary">
         Trusted by Leading NGOs
       </h2>
       <TrustedBy className="my-8" />
 
-
-
       {/* Contact Us Section */}
-      <div id="contact" className="flex flex-col items-center gap-6 w-full py-12 md:py-16 lg:py-20 px-4 border-t">
+      <div
+        id="contact"
+        className="flex flex-col items-center gap-6 w-full py-12 md:py-16 lg:py-20 px-4 border-t"
+      >
         <h2 className="text-3xl lg:text-4xl font-bold text-primary text-center">
           Contact Us
         </h2>
         <p className="text-center text-muted-foreground text-base xl:text-lg max-w-2xl">
-          Have questions, suggestions, or need help? We'd love to hear from you! 
-          Feel free to reach out at <span className="text-primary font-semibold mr-1">support@petvantage.com</span> 
+          Have questions, suggestions, or need help? We'd love to hear from you!
+          Feel free to reach out at{" "}
+          <span className="text-primary font-semibold mr-1">
+            support@petvantage.com
+          </span>
           or connect with us through our social media platforms.
         </p>
         <div className="flex gap-4">
-          <Button variant="outline">Email Us</Button>
-          <Button>Follow on Instagram</Button>
+          <a href="mailto:support@petvantage.com">
+            <Button variant="outline">Email Us</Button>
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button>Follow on Instagram</Button>
+          </a>
         </div>
       </div>
-
 
       {/* Footer Section */}
       <footer className="bg-background text-primary py-8 mt-8 border-t border-border">

@@ -22,7 +22,7 @@ const ManageRequests = () => {
         }
       })
       setRequests(response.data.data)
-      // console.log(response.data.data);
+      console.log(response.data.data);
       // console.log(response.data.data[0].petID.addedByID._id === myID ? "matched" : "False");
       // console.log(response.data.data[0].petID.addedByID._id, myID);
     } catch (error) {
@@ -63,18 +63,18 @@ const ManageRequests = () => {
       <div className="flex flex-wrap gap-4 justify-center mb-10">
 
 
-        {requests.length > 0 ? requests.map((req, index) =>  {return (req.petID.addedByID._id == myID && req.adoptionStatus == "pending") ? (
+        {requests?.length > 0 ? requests.map((req, index) =>  {return (req.petID.addedByID._id == myID && req.adoptionStatus == "pending") ? (
           <Card key={index} className="w-full sm:w-[48%] lg:w-[18%] bg-muted/40">
             <CardContent className="p-4 space-y-4">
               <h2 className="text-lg font-semibold text-primary">🐾 {req.petID.name}</h2>
               <Separator />
               <p>
                 <span className="font-medium text-foreground">Name:</span>{" "}
-                <span className="text-muted-foreground">{req.reqUserID.name}</span>
+                {req.reqUserID && <span className="text-muted-foreground">{req.reqUserID.name}</span>}
               </p>
               <p>
                 <span className="font-medium text-foreground">Email:</span>{" "}
-                <span className="text-muted-foreground">{req.reqUserID.email}</span>
+                {req.reqUserID && <span className="text-muted-foreground">{req.reqUserID.email}</span>}
               </p>
               <p>
                 <span className="font-medium text-foreground">Phone:</span>{" "}
@@ -100,12 +100,12 @@ const ManageRequests = () => {
       
       <ScrollArea className="h-[200px] w-full rounded-md border p-4" >
       <div className="flex flex-col gap-3">
-        {requests.length > 0 ? requests.map((req,index) =>{return req.adoptionStatus != "pending" ? (
+        {requests?.length > 0 ? requests.map((req,index) =>{return req.adoptionStatus != "pending" ? (
           <Card key={index} className="bg-muted/30">
             <CardContent className="p-4 flex justify-between items-center">
               <div>
                 <h3 className="font-semibold">{req.petID.name}</h3>
-                <p className="text-sm text-muted-foreground">{req.reqUserID.name} — {req.reqUserID.email}</p>
+                {req.reqUserID ? <p className="text-sm text-muted-foreground">{req.reqUserID.name} — {req.reqUserID.email}</p> : null}
               </div>
               <div className="flex gap-2">
               <span
