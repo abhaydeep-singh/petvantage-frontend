@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import welcome from "../assets/svg/welcome.svg"; // img src={welcome}
 import dogWalking from "../assets/svg/dog-walking.svg";
 import { ParticlesBackground, Product } from "@/components";
 
+import { Heart } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -11,8 +12,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import axios from "axios";
+const apiURL = import.meta.env.VITE_API_URL;
+
 
 function UserMarketplace() {
+  const [ products, setProducts ] = useState([]);
+  async function fetchProducts(){
+    try {
+      let response = await axios.post(`${apiURL}/api/product/all`,{},{headers:{
+        authorization:sessionStorage.getItem("token")
+      }});
+
+      console.log(response.data.data);
+      setProducts(response.data.data);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
+  useEffect(()=>{
+    const getProducts = async ()=>{ fetchProducts() }
+    getProducts();
+  },[])
   return (
     <div className={`w-full h-screen ${false ? "sm:ml-64" : "sm:ml-16"}`}>
       
@@ -118,14 +142,33 @@ function UserMarketplace() {
           </div>
 
           <div className="flex flex-wrap gap-6 justify-center">
+            {products?.length > 0 ? products.map((item,index)=>{
+                return(
+                  <div key={index} className="card bg-gray-600 overflow-hidden p-2 h-[30vh] md:h-[22vh] w-[300px] md:w-[200px] lg:h-[240px] lg:w-[250px]  bg-center bg-contain bg-no-repeat border rounded-2xl lg:rounded-3xl flex flex-col justify-end items-center gap-1">
+                          <div
+                            className="img bg-gray-600 w-full h-[80%] bg-center bg-cover bg-no-repeat "
+                            style={{
+                              backgroundImage: `url(${item.image})`,
+                            }}
+                          ></div>
+                          <div className="w-full flex items-center justify-center gap-3">
+                            <Button className="bg-white text-black my-3 w-[60%] ">
+                              Add To Cart
+                            </Button>
+                            <Heart className="hover:fill-red-600" color="red" size={35} />
+                          </div>
+                        </div>
+                )
+            }) : null}
+
+            {/* <Product />
             <Product />
             <Product />
             <Product />
             <Product />
             <Product />
             <Product />
-            <Product />
-            <Product />
+            <Product /> */}
           </div>
         </div>
       </div>

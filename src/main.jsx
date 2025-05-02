@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { Article, Blog, Community, Landing, ManageMarketplace, ManageRequests, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome, UserMarketplace, Login, AdminDashboard, AdminHome, RegisterNGO, ShowPets, AdminRequests, AdminShowPets } from "./pages";
+import { Article, Blog, Community, Landing, ManageMarketplace, ManageRequests, NGODashboard, PetList, RequestsUser, UserDashboard,UserHome, UserMarketplace, Login, AdminDashboard, AdminHome, RegisterNGO, ShowPets, AdminRequests, AdminShowPets, BlogEditor } from "./pages";
 import App from "./App.jsx";
 import {
   Route,
@@ -21,10 +21,14 @@ const router = createBrowserRouter(
       <Route path="" element={<Landing />} />
       <Route path="login/:action" element={<Login/>}></Route>
       <Route path="ngo-register" element={<RegisterNGO/>}></Route>
+      
+      {/* TO make it accesable for everyone */}
+      <Route path="article/:id" element={<Article/>}/>
+
       <Route path="user-dashboard" element={<UserDashboard />}>
             <Route path="user-home" element={<UserHome/>}/>
             <Route path="blog" element={<Blog/>}/>
-            <Route path="article" element={<Article/>}/>
+            
             <Route path="pet-list/:category" element={<PetList/>}/>
             <Route path="requests" element={<RequestsUser/>}/>
             <Route path="marketplace" element={<UserMarketplace/>}/>
@@ -40,6 +44,7 @@ const router = createBrowserRouter(
             <Route path="community" element={<Community/>}/>
             <Route path="requests" element={<ManageRequests/>}/>
             <Route path="pets" element={<ShowPets/>}/>
+            <Route path="editor" element={<BlogEditor/>}/>
             
       </Route>
       <Route path="admin" element={<AdminDashboard/>}>
