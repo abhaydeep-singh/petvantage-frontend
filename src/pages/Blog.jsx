@@ -66,7 +66,7 @@ function Blog() {
 
         {/* Articles */}
         <div className="mt-10 grid gap-6">
-          {articles.length > 0
+          {articles?.length > 0
             ? articles.map((item, index) => {
                 return (
                   <Article
@@ -103,7 +103,3 @@ export function Article({ title, desc,articleID }) {
 
 export default Blog;
 
-// <Article
-//             title="Why Your Pet Needs a Daily Routine"
-//             desc="Understanding the benefits of a structured daily routine for pets."
-//           />

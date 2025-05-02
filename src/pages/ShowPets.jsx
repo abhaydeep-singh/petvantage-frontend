@@ -86,7 +86,7 @@ function ShowPets() {
 
      
       {/* View Modes */}
-{filteredPets.length === 0 ? (
+{filteredPets?.length === 0 ? (
   <div className="text-center text-muted-foreground text-lg font-semibold mt-10">
     No Pets Found
   </div>

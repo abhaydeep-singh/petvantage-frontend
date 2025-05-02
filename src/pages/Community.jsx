@@ -63,7 +63,7 @@ function Community() {
             likes: 87,
           }}
         /> */}
-        {posts.length > 0 ? posts.map((element,index)=>{
+        {posts?.length > 0 ? posts.map((element,index)=>{
           const timeAgo = getTimeAgo(element.createdAt);
           return(
            <CommunityPost key={index}

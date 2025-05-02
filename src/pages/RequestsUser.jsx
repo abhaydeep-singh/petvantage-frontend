@@ -72,7 +72,7 @@ const fetchReqs = async()=>{
           <span className="w-1/3 text-right">Status / Action</span>
         </div>
 
-        {requests.length > 0 ? (
+        {requests?.length > 0 ? (
           <div className="divide-y divide-gray-200">
             {requests.map((req, index) => (req.reqUserID && myId === req.reqUserID._id) ? (
               <div
