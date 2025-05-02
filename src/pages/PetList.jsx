@@ -30,7 +30,10 @@ const PetList = () => {
 
   useEffect(()=>{
     
-    fetchPets()
+    const getPets = async()=>{
+      await fetchPets();
+    }
+    getPets();
     
   },[triggerRender])
 
