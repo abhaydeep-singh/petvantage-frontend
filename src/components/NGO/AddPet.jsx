@@ -35,10 +35,10 @@ export function AddPet({ open, setOpen }) {
   const [loading, setLoading] = useState(false);
 
   const breedOptions = {
-    dog: ["Labrador", "Bulldog", "Beagle", "German Shepherd"],
-    cat: ["Persian", "Siamese", "Maine Coon", "Bengal"],
-    rabbit: ["Holland Lop", "Netherland Dwarf", "Flemish Giant"],
-    bird: ["Parrot", "Cockatiel", "Canary", "Budgie"],
+    dogs: ["Labrador", "Bulldog", "Beagle", "German Shepherd"],
+    cats: ["Persian", "Siamese", "Maine Coon", "Bengal"],
+    rabbits: ["Holland Lop", "Netherland Dwarf", "Flemish Giant"],
+    birds: ["Parrot", "Cockatiel", "Canary", "Budgie"],
   };
 
   const handleImageChange = (e) => {
