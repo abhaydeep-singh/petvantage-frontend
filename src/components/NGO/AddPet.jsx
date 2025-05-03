@@ -141,10 +141,10 @@ export function AddPet({ open, setOpen }) {
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="dog">Dog</SelectItem>
-                <SelectItem value="cat">Cat</SelectItem>
-                <SelectItem value="rabbit">Rabbit</SelectItem>
-                <SelectItem value="bird">Bird</SelectItem>
+                <SelectItem value="dogs">Dogs</SelectItem>
+                <SelectItem value="cats">Cats</SelectItem>
+                <SelectItem value="rabbits">Rabbits</SelectItem>
+                <SelectItem value="birds">Birds</SelectItem>
               </SelectContent>
             </Select>
           </div>

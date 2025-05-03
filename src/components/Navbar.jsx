@@ -62,12 +62,12 @@ function Navbar() {
           </li>
 
           <li>
-            <Button variant="ghost" className="w-3/4" onClick={() => setMenuOpen(false)}>
+            <Button variant="ghost" className="w-3/4" onClick={() => handleNavigate('/login/register')}>
               Sign Up
             </Button>
           </li>
           <li>
-            <Button variant="ghost" className="w-3/4" onClick={() => handleNavigate('/login')}>
+            <Button variant="ghost" className="w-3/4" onClick={() => handleNavigate('/login/login')}>
               Login
             </Button>
           </li>
