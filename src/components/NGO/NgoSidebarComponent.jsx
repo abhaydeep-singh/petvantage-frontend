@@ -186,15 +186,16 @@ function NgoSidebarComponent() {
                   onClick={() => navigate("/ngo-dashboard/requests")}
                   showText
                 />
-                <SidebarItem
+                {/* <SidebarItem
                   icon={<ShoppingCart />}
                   text="Marketplace"
                   onClick={() => navigate("/ngo-dashboard/marketplace")}
                   showText
-                />
+                /> */}
                 <SidebarItem
                   icon={<MessageSquare />}
                   text="Community"
+                  onClick={() => navigate("/user-dashboard/community")}
                   showText
                 />
                 <SidebarItem
@@ -202,6 +203,12 @@ function NgoSidebarComponent() {
                   text="Blog"
                   onClick={() => navigate("/ngo-dashboard/blog")}
                   showText
+                />
+                <SidebarItem
+                  icon={<FileText />}
+                  text="Add Blog"
+                  onClick={() => navigate("/ngo-dashboard/editor")}
+                  showText={isOpen}
                 />
                 <AlertDialog>
                   <AlertDialogTrigger asChild>

@@ -183,15 +183,16 @@ function SidebarComponent() {
                   onClick={() => navigate("/user-dashboard/requests")}
                   showText
                 />
-                <SidebarItem
+                {/* <SidebarItem
                   icon={<ShoppingCart />}
                   text="Marketplace"
                   onClick={() => navigate("/user-dashboard/marketplace")}
                   showText
-                />
+                /> */}
                 <SidebarItem
                   icon={<MessageSquare />}
                   text="Community"
+                  onClick={() => navigate("/user-dashboard/community")}
                   showText
                 />
                 <SidebarItem
