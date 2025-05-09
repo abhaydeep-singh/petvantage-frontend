@@ -51,6 +51,9 @@ const router = createBrowserRouter(
             <Route path="admin-home" element={<AdminHome/>}/>
             <Route path="requests" element={<AdminRequests/>}/>
             <Route path="pets" element={<AdminShowPets/>}/>
+            <Route path="blog" element={<Blog/>}/>
+            <Route path="community" element={<Community/>}/>
+            <Route path="editor" element={<BlogEditor/>}/>
       </Route>
     </Route>
   )
