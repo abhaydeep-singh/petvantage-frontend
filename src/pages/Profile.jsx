@@ -15,6 +15,7 @@ import axios from "axios";
 import { addListener } from "@reduxjs/toolkit";
 import { hideLoader, showLoader } from "@/redux/loaderSlice";
 const apiURL = import.meta.env.VITE_API_URL;
+import { ToastContainer, toast } from "react-toastify";
 
 function Profile() {
   const isOpen = useSelector((state) => state.sidebar.isOpen);
@@ -132,7 +133,32 @@ function Profile() {
       );
 
       console.log("Update success:", response.data);
-      // Optional: Refresh data or show success toast
+      if(response.data.success){
+         toast.success(`Profile Updated Succesfully`, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  // transition: Bounce,
+                });
+      }
+      else if(response.data.success == false){
+        toast.warn(`${response.data.message}`, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  // transition: Bounce,
+                });
+      }
     } catch (error) {
       console.error("Update failed:", error);
     } finally {
@@ -140,14 +166,55 @@ function Profile() {
     }
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = async(e) => {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
       alert("New passwords do not match!");
       return;
     }
-    console.log("Password change request:", { oldPassword, newPassword });
+    // console.log("Password change request:", { oldPassword, newPassword });
     // Call change password API here
+    dispatch(showLoader());
+    try {
+      let response = await axios.post(`${apiURL}/api/user/changepass`,{
+        userID:sessionStorage.getItem("_id"),
+        oldPassword:oldPassword,
+        newPassword:newPassword,  
+        confirmPassword:confirmNewPassword
+      },{headers:{authorization:sessionStorage.getItem("token")}})
+      console.log(response);
+      if(response.data.success){
+         toast.success(`Password Change Succesfull`, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  // transition: Bounce,
+                });
+      }
+      else{
+        toast.warn(`${response.data.message}`, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  // transition: Bounce,
+                });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    finally{
+      dispatch(hideLoader());
+    }
     setOldPassword("");
     setNewPassword("");
     setConfirmNewPassword("");
@@ -160,6 +227,7 @@ function Profile() {
         isOpen ? "sm:ml-64" : "sm:ml-16"
       } `}
     >
+      <ToastContainer/>
       <Card className="max-w-3xl mx-auto mt-10 shadow-xl shadow-accent">
         <CardHeader>
           <CardTitle>Profile Settings</CardTitle>
