@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils"; // ShadCN utility for class merging
 import { FeaturedArticles, ParticlesBackground } from "@/components";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const petCategories = [
   { name: "Dogs", bgColor: "bg-blue-500", nav:"/user-dashboard/pet-list/dogs" }, //FIXME:
@@ -22,7 +23,8 @@ const backgroundImages = [
 ];
 
 function UserHome() {
-  const [isOpen, setIsOpen] = useState(false); // Controls sidebar state //TODO: require state Management
+  // const [isOpen, setIsOpen] = useState(false); // Controls sidebar state //TODO: require state Management
+    const isOpen = useSelector((state) => state.sidebar.isOpen);
   const [bgIndex, setBgIndex] = useState(0); // Controls background image index
   const navigate = useNavigate();
 

@@ -3,12 +3,16 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { AddPet } from '@/components/NGO/AddPet'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { hideLoader, showLoader } from "@/redux/loaderSlice"
+// const dispatch = useDispatch();
 
 function AdminHome() {
   const [open, setOpen] = useState(false)
+  const isOpen = useSelector((state) => state.sidebar.isOpen);
   return (
     // sm:ml-64 is open
-    <div className={`w-full h-screen ${false ? "sm:ml-64" : "sm:ml-16"}`}>
+    <div className={`w-full h-screen ${isOpen ? "sm:ml-64" : "sm:ml-16"}`}>
     <div className="hero relative h-[40vh] w-full border flex items-center justify-center bg-cover bg-center"
      style={{
             backgroundImage: `url(/images/cat.jpg)`,

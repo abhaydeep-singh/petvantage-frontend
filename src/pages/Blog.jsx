@@ -3,12 +3,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const apiURL = import.meta.env.VITE_API_URL;
+import { useDispatch, useSelector } from "react-redux"
+import { hideLoader, showLoader } from "@/redux/loaderSlice"
 
 
 function Blog() {
   const [articles, setArticles] = useState([]);
+  const dispatch = useDispatch();
   async function fetchArticles() {
     try {
+      dispatch(showLoader());
       let response = await axios.post(
         `${apiURL}/api/blog/all`,
         {},
@@ -22,6 +26,9 @@ function Blog() {
       setArticles(response.data.data);
     } catch (error) {
       console.log("An error occured while fetching Articles: ", error);
+    }
+    finally{
+      dispatch(hideLoader());
     }
   }
   useEffect(() => {

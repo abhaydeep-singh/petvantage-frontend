@@ -25,9 +25,13 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { ToastContainer, toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { setSidebar } from "@/redux/sidebarSlice";
 
 function NgoSidebarComponent() {
-  const [isOpen, setIsOpen] = useState(false); // Desktop Sidebar
+  // const [isOpen, setIsOpen] = useState(false); // Desktop Sidebar
+  const isOpen = useSelector((state) => state.sidebar.isOpen);
+  const dispatch = useDispatch();
   const [isMobileOpen, setIsMobileOpen] = useState(false); // Mobile Sidebar
   const navigate = useNavigate();
 
@@ -85,7 +89,7 @@ function NgoSidebarComponent() {
           {/* Collapse Button */}
           <button
             className="absolute -right-5 top-6 w-10 h-10 text-black bg-primary rounded-full shadow-md flex items-center justify-center"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => dispatch(setSidebar())}
           >
             {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
           </button>
@@ -96,7 +100,7 @@ function NgoSidebarComponent() {
               isOpen ? "opacity-100" : "opacity-0 hidden"
             )}
           >
-            🐾 User Dashboard
+            🐾 NGO Dashboard
           </h2>
 
           <nav className="mt-14 space-y-4 flex flex-col items-start">
@@ -171,7 +175,7 @@ function NgoSidebarComponent() {
         {isMobileOpen && (
           <>
             <div className="fixed top-0 left-0 h-full w-64 bg-secondary text-white p-4 flex flex-col z-50 sm:hidden">
-              <h2 className="text-xl font-bold">🐾 User Dashboard</h2>
+              <h2 className="text-xl font-bold">🐾 NGO Dashboard</h2>
 
               <nav className="mt-14 space-y-4 flex flex-col items-start">
                 <SidebarItem
@@ -195,7 +199,7 @@ function NgoSidebarComponent() {
                 <SidebarItem
                   icon={<MessageSquare />}
                   text="Community"
-                  onClick={() => navigate("/user-dashboard/community")}
+                  onClick={() => navigate("/ngo-dashboard/community")}
                   showText
                 />
                 <SidebarItem

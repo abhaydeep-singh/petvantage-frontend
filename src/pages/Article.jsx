@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 const apiURL = import.meta.env.VITE_API_URL;
+import { useDispatch, useSelector } from "react-redux"
+import { hideLoader, showLoader } from "@/redux/loaderSlice"
 
 function Article() {
   const { id } = useParams();
@@ -13,7 +15,8 @@ function Article() {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [trigger, setTrigger] = useState(false);
-
+  const dispatch = useDispatch();
+  
   async function addComment() {
     setLoading(true);
     try {
@@ -71,6 +74,7 @@ function Article() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
+        dispatch(showLoader());
         const res = await axios.post(
           `${apiURL}/api/blog/single`,
           {
@@ -87,6 +91,9 @@ function Article() {
         setBlog(res.data.data);
       } catch (err) {
         console.error("Error fetching blog:", err);
+      }
+      finally{
+        dispatch(hideLoader());
       }
     };
 

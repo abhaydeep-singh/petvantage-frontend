@@ -4,10 +4,14 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux"
+import { hideLoader, showLoader } from "@/redux/loaderSlice"
 
 const apiURL = import.meta.env.VITE_API_URL;
 
 function AdminShowPets() {
+  const isOpen = useSelector((state) => state.sidebar.isOpen);
+  const dispatch = useDispatch();
   const [pets, setPets] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [sortOption, setSortOption] = useState("");
@@ -15,6 +19,7 @@ function AdminShowPets() {
 
   const fetchPets = async () => {
     try {
+      dispatch(showLoader());
       const response = await axios.post(`${apiURL}/api/pet/getall`, {}, {
         headers: {
           authorization: sessionStorage.getItem("token")
@@ -34,6 +39,9 @@ function AdminShowPets() {
     } catch (error) {
       console.log("An error occurred while fetching Pets: ", error);
     }
+    finally{
+      dispatch(hideLoader());
+    }
   };
 
   useEffect(() => {
@@ -49,7 +57,7 @@ function AdminShowPets() {
     });
 
   return (
-    <div className={`w-full min-h-screen bg-background p-6 ${false ? "sm:ml-64" : "sm:ml-16"}`}>
+    <div className={`w-full min-h-screen bg-background p-6 ${isOpen ? "sm:ml-64" : "sm:ml-16"}`}>
       {/* Top Controls */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <h1 className="text-2xl font-bold text-primary">Manage Pets</h1>

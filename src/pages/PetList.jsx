@@ -4,14 +4,18 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const apiURL = import.meta.env.VITE_API_URL;
+import { useDispatch, useSelector } from "react-redux"
+import { hideLoader, showLoader } from "@/redux/loaderSlice"
 
 const PetList = () => {
+  const dispatch = useDispatch();
   const {category} = useParams();
   const [pets,setPets] = useState([]);
   const [triggerRender,setTriggerRender] = useState(true); // only for rerender purpose, in useEffect
   
   async function fetchPets(){
     try {
+      dispatch(showLoader());
       let response = await axios.post(`${apiURL}/api/pet/getbycat`,{
         category:category 
       },{headers:{authorization:sessionStorage.getItem("token")}})
@@ -25,6 +29,9 @@ const PetList = () => {
       
     } catch (error) {
       console.log(`An Error occured while fecthing data: ${error}`)
+    }
+    finally{
+      dispatch(hideLoader());
     }
   };
 
@@ -65,7 +72,7 @@ const PetList = () => {
   // }
 
   return (
-    <div className="p-6 mx-auto">
+    <div  className="p-6 mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-center">Available Pets for Adoption</h2>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
         {pets?.length > 0 ? pets.map((pet,index) => (

@@ -27,9 +27,13 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { ToastContainer, toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { setSidebar } from "@/redux/sidebarSlice";
 
 function AdminSidebar() {
-  const [isOpen, setIsOpen] = useState(false); // Desktop Sidebar
+  // const [isOpen, setIsOpen] = useState(false); // Desktop Sidebar
+  const isOpen = useSelector((state) => state.sidebar.isOpen);
+  const dispatch = useDispatch();
   const [isMobileOpen, setIsMobileOpen] = useState(false); // Mobile Sidebar
   const navigate = useNavigate();
 
@@ -90,7 +94,7 @@ function AdminSidebar() {
           {/* Collapse Button */}
           <button
             className="absolute -right-5 top-6 w-10 h-10 text-black bg-primary rounded-full shadow-md flex items-center justify-center"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => dispatch(setSidebar())}
           >
             {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
           </button>

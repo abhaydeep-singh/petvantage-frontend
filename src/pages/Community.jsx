@@ -2,6 +2,8 @@ import { CommunityPost, CommunityPostInput } from "@/components";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 const apiURL = import.meta.env.VITE_API_URL;
+import { useDispatch, useSelector } from "react-redux"
+import { hideLoader, showLoader } from "@/redux/loaderSlice"
 
 function getTimeAgo(dateString) {
   const now = new Date();
@@ -20,22 +22,28 @@ function getTimeAgo(dateString) {
 
 
 function Community() {
-  const [posts,setPosts] = useState([])
+  const [posts,setPosts] = useState([]);
+  const dispatch = useDispatch();
   useEffect(()=>{
     fetchPosts()
   },[])
 
   async function fetchPosts(){
-    let response = await axios.post(`${apiURL}/api/post/get`,{},{
+    try {
+      dispatch(showLoader());
+       let response = await axios.post(`${apiURL}/api/post/get`,{},{
       headers:{
         authorization:sessionStorage.getItem("token")
       }
-    });
-    console.log(response.data.data) // is an array
-    setPosts(response.data.data); // is an array
-    // console.log(response.data.data[1].addedBy.name)
-    // console.log(response.data.data[1].content)
-    // console.log(response.data.data[1].image) src
+        });
+        console.log(response.data.data) // is an array
+        setPosts(response.data.data); // is an array
+    } catch (error) {
+      console.log(error);
+    }
+    finally{
+      dispatch(hideLoader());
+    }
     
   };
 

@@ -5,6 +5,8 @@ import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import axios from "axios"
 import { handler } from "tailwindcss-animate"
+import { useDispatch, useSelector } from "react-redux"
+import { hideLoader, showLoader } from "@/redux/loaderSlice"
 
 const apiURL = import.meta.env.VITE_API_URL;
 const myID = sessionStorage.getItem("_id")
@@ -12,10 +14,13 @@ const myID = sessionStorage.getItem("_id")
 
 const ManageRequests = () => {
   const [requests,setRequests] = useState([]);
+  const isOpen = useSelector((state) => state.sidebar.isOpen);
   const [trigger,setTrigger] = useState(true);
+  const dispatch = useDispatch();
 
   async function fetchRequests(){
     try {
+      dispatch(showLoader());
       let response = await axios.post(`${apiURL}/api/request/getall`,{},{
         headers:{
           authorization:sessionStorage.getItem("token")
@@ -28,11 +33,15 @@ const ManageRequests = () => {
     } catch (error) {
       console.log("Something went wrong while fething Requests: ",error)
     }
+    finally{
+      dispatch(hideLoader());
+    }
     
   };
 
 
   useEffect(() => { //UseEffect cannot be async itself, coz it do now return a promise, instead it return a cleanup function
+    
     const getRequests = async () => { //IMPORTANT to declare it in await coz that fn in async, otherwise react quickly move on without waiting to fetch 
       await fetchRequests()
     }
@@ -56,7 +65,7 @@ const ManageRequests = () => {
     }
   }
   return (
-    <div className={`w-full h-screen min-h-screen  p-4 md:p-8 bg-background text-foreground ${false ? "sm:ml-64" : "sm:ml-16"}`}>
+    <div className={`w-full h-screen min-h-screen  p-4 md:p-8 bg-background text-foreground ${isOpen ? "sm:ml-64" : "sm:ml-16"}`}>
       <h1 className="text-2xl font-bold mb-6">Adoption Requests</h1>
         
       <ScrollArea className="h-[59vh] w-full rounded-md border p-4" >

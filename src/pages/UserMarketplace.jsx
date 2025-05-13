@@ -13,11 +13,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import axios from "axios";
+import { useSelector } from "react-redux";
 const apiURL = import.meta.env.VITE_API_URL;
 
 
 function UserMarketplace() {
   const [ products, setProducts ] = useState([]);
+  const isOpen = useSelector((state) => state.sidebar.isOpen);
   async function fetchProducts(){
     try {
       let response = await axios.post(`${apiURL}/api/product/all`,{},{headers:{
@@ -38,7 +40,7 @@ function UserMarketplace() {
     getProducts();
   },[])
   return (
-    <div className={`w-full h-screen ${false ? "sm:ml-64" : "sm:ml-16"}`}>
+    <div className={`w-full h-screen ${isOpen ? "sm:ml-64" : "sm:ml-16"}`}>
       
       <br />
       <div className="heroslider gap-6 h-[40vh] w-full flex flex-col md:flex-row md:gap-20 items-center justify-center ">

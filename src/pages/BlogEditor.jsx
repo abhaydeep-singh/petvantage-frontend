@@ -14,10 +14,12 @@ import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import { ParticlesBackground } from "@/components";
+import { useSelector } from "react-redux";
 
 const apiURL = import.meta.env.VITE_API_URL;
 
 const BlogEditor = () => {
+  const isOpen = useSelector((state) => state.sidebar.isOpen);
   const [htmlData, setHtmlData] = useState("");
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
@@ -73,7 +75,7 @@ const BlogEditor = () => {
   };
 
   return (
-    <div className={`w-full h-screen ${false ? "sm:ml-64" : "sm:ml-16"}`}>
+    <div className={`w-full h-screen ${isOpen ? "sm:ml-64" : "sm:ml-16"}`}>
       <ParticlesBackground />
       <ToastContainer />
       <div className="p-4 min-h-screen text-white w-full">
