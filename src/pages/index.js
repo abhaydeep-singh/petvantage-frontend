@@ -19,6 +19,7 @@ import AdminRequests from "./AdminRequests";
 import AdminShowPets from "./AdminShowPets";
 import BlogEditor from "./BlogEditor";
 import Profile from "./Profile";
+import NGOProfile from "./NGOProfile";
 // import UserBlog from "./UserBlog";
 
-export {Landing, UserDashboard,UserHome,Blog,Article,PetList,RequestsUser,NGODashboard, ManageMarketplace, UserMarketplace, Community, ManageRequests, Login, AdminDashboard,AdminHome, RegisterNGO, ShowPets, AdminRequests, AdminShowPets, BlogEditor, Profile};
+export {Landing, UserDashboard,UserHome,Blog,Article,PetList,RequestsUser,NGODashboard, ManageMarketplace, UserMarketplace, Community, ManageRequests, Login, AdminDashboard,AdminHome, RegisterNGO, ShowPets, AdminRequests, AdminShowPets, BlogEditor, Profile, NGOProfile};

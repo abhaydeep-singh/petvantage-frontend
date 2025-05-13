@@ -12,15 +12,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import axios from "axios";
+import { addListener } from "@reduxjs/toolkit";
 import { hideLoader, showLoader } from "@/redux/loaderSlice";
 const apiURL = import.meta.env.VITE_API_URL;
 import { ToastContainer, toast } from "react-toastify";
 
-function Profile() {
+function NGOProfile() {
   const isOpen = useSelector((state) => state.sidebar.isOpen);
   const dispatch = useDispatch();
   const [myID, setMyID] = useState("");
 
+  // Profile info
   const [profile, setProfile] = useState({
     name: "",
     email: "",
@@ -31,6 +33,8 @@ function Profile() {
   });
 
   const [previewImage, setPreviewImage] = useState(null);
+
+  // Password change dialog state
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -40,7 +44,7 @@ function Profile() {
     try {
       dispatch(showLoader());
       let me = await axios.post(
-        `${apiURL}/api/petseeker/me`,
+        `${apiURL}/api/ngo/me`,
         {},
         {
           headers: {
@@ -51,7 +55,7 @@ function Profile() {
       const meID = me.data.data._id;
       setMyID(meID);
       let response = await axios.post(
-        `${apiURL}/api/petseeker/getsingle`,
+        `${apiURL}/api/ngo/getsingle`,
         { _id: meID },
         {
           headers: {
@@ -59,9 +63,11 @@ function Profile() {
           },
         }
       );
+      console.log(response.data.data);
+
       let data = {
-        name: response.data.data.userID.name,
-        email: response.data.data.userID.email,
+        name: response.data.data.userID.name, //check
+        email: response.data.data.userID.email, //check
         contact: response.data.data.contact,
         address: response.data.data.address,
         username: response.data.data.userID.username,
@@ -74,7 +80,7 @@ function Profile() {
       dispatch(hideLoader());
     }
   };
-
+  // Mock fetch on mount
   useEffect(() => {
     fetchMyData();
   }, []);
@@ -89,23 +95,8 @@ function Profile() {
     }
   };
 
-  const isValidEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
-
-    if (!isValidEmail(profile.email)) {
-      toast.warn("Please enter a valid email address", {
-        position: "top-right",
-        autoClose: 5000,
-        theme: "dark",
-      });
-      return;
-    }
-
     dispatch(showLoader());
 
     try {
@@ -115,8 +106,8 @@ function Profile() {
       formData.append("email", profile.email);
       formData.append("contact", profile.contact);
       formData.append("address", profile.address);
-      formData.append("username", profile.username);
-
+      formData.append("username", profile.username); // optional, if you update it
+    //   If it’s a File, you append it. If not (it’s still just the URL string from the backend), skip appending it — or else it’ll cause issues.
       if (profile.image instanceof File) {
         formData.append("image", profile.image);
       }
@@ -132,18 +123,32 @@ function Profile() {
         }
       );
 
-      if (response.data.success) {
-        toast.success("Profile Updated Successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          theme: "dark",
-        });
-      } else {
-        toast.warn(response.data.message || "Update failed", {
-          position: "top-right",
-          autoClose: 5000,
-          theme: "dark",
-        });
+      console.log("Update success:", response.data);
+      if(response.data.success){
+         toast.success(`Profile Updated Succesfully`, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  // transition: Bounce,
+                });
+      }
+      else if(response.data.success == false){
+        toast.warn(`${response.data.message}`, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  // transition: Bounce,
+                });
       }
     } catch (error) {
       console.error("Update failed:", error);
@@ -152,61 +157,68 @@ function Profile() {
     }
   };
 
-  const handlePasswordChange = async (e) => {
+  const handlePasswordChange = async(e) => {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
-      toast.warn("New passwords do not match", {
-        position: "top-right",
-        autoClose: 5000,
-        theme: "dark",
-      });
+      alert("New passwords do not match!");
       return;
     }
-
+    // console.log("Password change request:", { oldPassword, newPassword });
+    // Call change password API here
     dispatch(showLoader());
     try {
-      let response = await axios.post(
-        `${apiURL}/api/user/changepass`,
-        {
-          userID: sessionStorage.getItem("_id"),
-          oldPassword: oldPassword,
-          newPassword: newPassword,
-          confirmPassword: confirmNewPassword,
-        },
-        {
-          headers: {
-            authorization: sessionStorage.getItem("token"),
-          },
-        }
-      );
-
-      if (response.data.success) {
-        toast.success("Password Changed Successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          theme: "dark",
-        });
-      } else {
-        toast.warn(response.data.message || "Password update failed", {
-          position: "top-right",
-          autoClose: 5000,
-          theme: "dark",
-        });
+      let response = await axios.post(`${apiURL}/api/user/changepass`,{
+        userID:sessionStorage.getItem("_id"),
+        oldPassword:oldPassword,
+        newPassword:newPassword,  
+        confirmPassword:confirmNewPassword
+      },{headers:{authorization:sessionStorage.getItem("token")}})
+      console.log(response);
+      if(response.data.success){
+         toast.success(`Password Change Succesfull`, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  // transition: Bounce,
+                });
+      }
+      else{
+        toast.warn(`${response.data.message}`, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  // transition: Bounce,
+                });
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      dispatch(hideLoader());
-      setOldPassword("");
-      setNewPassword("");
-      setConfirmNewPassword("");
-      setOpen(false);
     }
+    finally{
+      dispatch(hideLoader());
+    }
+    setOldPassword("");
+    setNewPassword("");
+    setConfirmNewPassword("");
+    setOpen(false);
   };
 
   return (
-    <div className={`w-full min-h-screen p-4 ${isOpen ? "sm:ml-64" : "sm:ml-16"}`}>
-      <ToastContainer />
+    <div
+      className={`w-full min-h-screen p-4 ${
+        isOpen ? "sm:ml-64" : "sm:ml-16"
+      } `}
+    >
+      <ToastContainer/>
       <Card className="max-w-3xl mx-auto mt-10 shadow-xl shadow-accent">
         <CardHeader>
           <CardTitle>Profile Settings</CardTitle>
@@ -311,7 +323,9 @@ function Profile() {
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="confirmNewPassword">Confirm New Password</Label>
+                  <Label htmlFor="confirmNewPassword">
+                    Confirm New Password
+                  </Label>
                   <Input
                     id="confirmNewPassword"
                     type="password"
@@ -331,4 +345,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default NGOProfile;

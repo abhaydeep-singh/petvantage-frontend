@@ -60,26 +60,42 @@ function RegisterNGO() {
   return (
     <div className="w-full h-screen flex flex-col gap-8 items-center justify-center">
       <ToastContainer />
-      <ParticlesBackground/>
-      <form onSubmit={handleSubmit(onRegister)} encType="multipart/form-data" className="w-[400px]">
+      <ParticlesBackground />
+      <form
+        onSubmit={handleSubmit(onRegister)}
+        encType="multipart/form-data"
+        className="w-[400px]"
+      >
         <Card>
           <CardHeader>
             <CardTitle>Register</CardTitle>
-            <CardDescription>
-              Register for NGO
-            </CardDescription>
+            <CardDescription>Register for NGO</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" type="text" {...register("name", { required: "Name is required" })} />
-              {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+              <Input
+                id="name"
+                type="text"
+                {...register("name", { required: "Name is required" })}
+              />
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name.message}</p>
+              )}
             </div>
 
             <div className="space-y-1">
               <Label htmlFor="username">Username</Label>
-              <Input id="username" type="text" {...register("username", { required: "Username is required" })} />
-              {errors.username && <p className="text-red-500 text-sm">{errors.username.message}</p>}
+              <Input
+                id="username"
+                type="text"
+                {...register("username", { required: "Username is required" })}
+              />
+              {errors.username && (
+                <p className="text-red-500 text-sm">
+                  {errors.username.message}
+                </p>
+              )}
             </div>
 
             <div className="space-y-1">
@@ -89,10 +105,17 @@ function RegisterNGO() {
                 type="email"
                 {...register("regEmail", {
                   required: "Email is required",
-                  pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" },
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: "Invalid email format",
+                  },
                 })}
               />
-              {errors.regEmail && <p className="text-red-500 text-sm">{errors.regEmail.message}</p>}
+              {errors.regEmail && (
+                <p className="text-red-500 text-sm">
+                  {errors.regEmail.message}
+                </p>
+              )}
             </div>
 
             <div className="space-y-1">
@@ -102,10 +125,17 @@ function RegisterNGO() {
                 type="password"
                 {...register("regPassword", {
                   required: "Password is required",
-                  minLength: { value: 6, message: "Password must be at least 6 characters" },
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
                 })}
               />
-              {errors.regPassword && <p className="text-red-500 text-sm">{errors.regPassword.message}</p>}
+              {errors.regPassword && (
+                <p className="text-red-500 text-sm">
+                  {errors.regPassword.message}
+                </p>
+              )}
             </div>
 
             <div className="space-y-1">
@@ -115,10 +145,15 @@ function RegisterNGO() {
                 type="number"
                 {...register("contact", {
                   required: "Contact number is required",
-                  minLength: { value: 10, message: "Contact must be 10 digits" },
+                  minLength: {
+                    value: 10,
+                    message: "Contact must be 10 digits",
+                  },
                 })}
               />
-              {errors.contact && <p className="text-red-500 text-sm">{errors.contact.message}</p>}
+              {errors.contact && (
+                <p className="text-red-500 text-sm">{errors.contact.message}</p>
+              )}
             </div>
 
             <div className="space-y-1">
@@ -126,9 +161,13 @@ function RegisterNGO() {
               <Input
                 id="regNo"
                 type="text"
-                {...register("regNo", { required: "Registration Number is required" })}
+                {...register("regNo", {
+                  required: "Registration Number is required",
+                })}
               />
-              {errors.regNo && <p className="text-red-500 text-sm">{errors.regNo.message}</p>}
+              {errors.regNo && (
+                <p className="text-red-500 text-sm">{errors.regNo.message}</p>
+              )}
             </div>
 
             <div className="space-y-1">
@@ -137,9 +176,13 @@ function RegisterNGO() {
                 id="image"
                 type="file"
                 accept="image/*"
-                {...register("image", { required: "Profile image is required" })}
+                {...register("image", {
+                  required: "Profile image is required",
+                })}
               />
-              {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
+              {errors.image && (
+                <p className="text-red-500 text-sm">{errors.image.message}</p>
+              )}
             </div>
           </CardContent>
           <CardFooter>

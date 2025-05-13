@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ChevronRight,
   LogOut,
+  Settings
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
@@ -138,6 +139,12 @@ function NgoSidebarComponent() {
               icon={<FileText />}
               text="Add Blog"
               onClick={() => navigate("/ngo-dashboard/editor")}
+              showText={isOpen}
+            />
+            <SidebarItem
+              icon={<Settings />}
+              text="Settings"
+              onClick={() => navigate("/ngo-dashboard/profile")}
               showText={isOpen}
             />
             <AlertDialog>

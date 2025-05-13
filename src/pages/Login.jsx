@@ -308,8 +308,8 @@ function Login() {
                     {...registerRegister("regEmail", {
                       required: "Email is required",
                       pattern: {
-                        value: /^\S+@\S+$/i,
-                        message: "Invalid email address",
+                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                          message: "Invalid email format",
                       },
                     })}
                   />

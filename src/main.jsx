@@ -23,6 +23,7 @@ import {
   AdminShowPets,
   BlogEditor,
   Profile,
+  NGOProfile,
 } from "./pages";
 import App from "./App.jsx";
 import {
@@ -64,6 +65,7 @@ const router = createBrowserRouter(
         <Route path="requests" element={<ManageRequests />} />
         <Route path="pets" element={<ShowPets />} />
         <Route path="editor" element={<BlogEditor />} />
+        <Route path="profile" element={<NGOProfile />} />
       </Route>
       <Route path="admin" element={<AdminDashboard />}>
         <Route path="admin-home" element={<AdminHome />} />
