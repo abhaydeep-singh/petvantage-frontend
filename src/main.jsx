@@ -24,6 +24,8 @@ import {
   BlogEditor,
   Profile,
   NGOProfile,
+  AdminUser,
+  AdminNGO,
 } from "./pages";
 import App from "./App.jsx";
 import {
@@ -74,6 +76,8 @@ const router = createBrowserRouter(
         <Route path="blog" element={<Blog />} />
         <Route path="community" element={<Community />} />
         <Route path="editor" element={<BlogEditor />} />
+        <Route path="users" element={<AdminUser />} />
+        <Route path="ngos" element={<AdminNGO />} />
       </Route>
     </Route>
   )

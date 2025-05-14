@@ -11,6 +11,8 @@ import {
   LogOut,
   Plus,
   Dog,
+  PersonStanding,
+  Building2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +31,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setSidebar } from "@/redux/sidebarSlice";
+
 
 function AdminSidebar() {
   // const [isOpen, setIsOpen] = useState(false); // Desktop Sidebar
@@ -122,6 +125,18 @@ function AdminSidebar() {
               showText={isOpen}
             />
             <SidebarItem
+              icon={<Building2 />}
+              text="View NGOs"
+              onClick={() => navigate("/admin/ngos")}
+              showText={isOpen}
+            />
+            <SidebarItem
+              icon={<PersonStanding />}
+              text="View PetSeekers"
+              onClick={() => navigate("/admin/users")}
+              showText={isOpen}
+            />
+            <SidebarItem
               icon={<Dog />}
               text="Monitor all Pets"
               onClick={() => navigate("/admin/pets")}
@@ -145,6 +160,7 @@ function AdminSidebar() {
               onClick={() => navigate("/admin/editor")}
               showText={isOpen}
             />
+
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <SidebarItem
@@ -183,69 +199,84 @@ function AdminSidebar() {
               <h2 className="text-xl font-bold">🐾 Admin Dashboard</h2>
 
               <nav className="mt-14 space-y-4 flex flex-col items-start">
+            <SidebarItem
+              icon={<Home />}
+              text="Home"
+              onClick={() => navigate("/admin/admin-home")}
+              showText={true}
+            />
+            <SidebarItem
+              icon={<SquareCheck />}
+              text="Monitor all Requests"
+              onClick={() => navigate("/admin/requests")}
+              showText={true}
+            />
+            <SidebarItem
+              icon={<Building2 />}
+              text="View NGOs"
+              onClick={() => navigate("/admin/ngos")}
+              showText={true}
+            />
+            <SidebarItem
+              icon={<PersonStanding />}
+              text="View PetSeekers"
+              onClick={() => navigate("/admin/users")}
+              showText={true}
+            />
+            <SidebarItem
+              icon={<Dog />}
+              text="Monitor all Pets"
+              onClick={() => navigate("/admin/pets")}
+              showText={true}
+            />
+            <SidebarItem
+              icon={<MessageSquare />}
+              text="Community"
+              onClick={() => navigate("/admin/community")}
+              showText={true}
+            />
+            <SidebarItem
+              icon={<FileText />}
+              text="Blog"
+              onClick={() => navigate("/admin/blog")}
+              showText={true}
+            />
+            <SidebarItem
+              icon={<Plus />}
+              text="Add Blog"
+              onClick={() => navigate("/admin/editor")}
+              showText={true}
+            />
+
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
                 <SidebarItem
-                  icon={<Home />}
-                  text="Home"
-                  onClick={() => navigate("/admin/admin-home")}
+                  icon={<LogOut />}
+                  text="Logout"
                   showText={true}
                 />
-                <SidebarItem
-                  icon={<SquareCheck />}
-                  text="Monitor all Requests"
-                  onClick={() => navigate("/admin/requests")}
-                  showText={true}
-                />
-                <SidebarItem
-                  icon={<Dog />}
-                  text="Monitor all Pets"
-                  onClick={() => navigate("/admin/pets")}
-                  showText={true}
-                />
-                <SidebarItem
-                  icon={<MessageSquare />}
-                  text="Community"
-                  onClick={() => navigate("/admin/community")}
-                  showText={true}
-                />
-                <SidebarItem
-                  icon={<FileText />}
-                  text="Blog"
-                  onClick={() => navigate("/admin/blog")}
-                  showText={true}
-                />
-                <SidebarItem
-                  icon={<Plus />}
-                  text="Add Blog"
-                  onClick={() => navigate("/admin/editor")}
-                  showText={true}
-                />
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <SidebarItem icon={<LogOut />} text="Logout" showText />
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Are you sure to Logout?
-                      </AlertDialogTitle>
-                      <AlertDialogDescription>
-                        You will have to login again using resgitered Email and
-                        Password.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={() => {
-                          handleLogout();
-                        }}
-                      >
-                        Continue
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </nav>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you sure to Logout?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    You will have to login again using resgitered Email and
+                    Password.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={() => {
+                      handleLogout();
+                    }}
+                  >
+                    Continue
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </nav>
             </div>
 
             {/* Overlay to close mobile sidebar */}

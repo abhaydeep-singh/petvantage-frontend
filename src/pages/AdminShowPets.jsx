@@ -15,7 +15,7 @@ function AdminShowPets() {
   const [pets, setPets] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [sortOption, setSortOption] = useState("");
-  const [viewMode, setViewMode] = useState("card"); // selector for card/table
+  const [viewMode, setViewMode] = useState("table"); // selector for card/table
 
   const fetchPets = async () => {
     try {
@@ -64,7 +64,7 @@ function AdminShowPets() {
 
         <div className="flex flex-wrap gap-4">
           {/* Filter by Category */}
-          <Select onValueChange={setCategoryFilter}>
+          {/* <Select onValueChange={setCategoryFilter}>
             <SelectTrigger className="w-[150px]">
               <SelectValue placeholder="Filter Category" />
             </SelectTrigger>
@@ -74,10 +74,10 @@ function AdminShowPets() {
               <SelectItem value="cat">Cats</SelectItem>
               <SelectItem value="bird">Birds</SelectItem>
             </SelectContent>
-          </Select>
+          </Select> */}
 
           {/* Sort Option */}
-          <Select onValueChange={setSortOption}>
+          {/* <Select onValueChange={setSortOption}>
             <SelectTrigger className="w-[150px]">
               <SelectValue placeholder="Sort By" />
             </SelectTrigger>
@@ -85,12 +85,12 @@ function AdminShowPets() {
               <SelectItem value="category">Category</SelectItem>
               <SelectItem value="breed">Breed</SelectItem>
             </SelectContent>
-          </Select>
+          </Select> */}
 
           {/* Toggle View */}
-          <Button variant="outline" onClick={() => setViewMode(viewMode === "card" ? "table" : "card")}>
+          {/* <Button variant="outline" onClick={() => setViewMode(viewMode === "card" ? "table" : "card")}>
             {viewMode === "card" ? "Show Table View" : "Show Card View"}
-          </Button>
+          </Button> */}
         </div>
       </div>
 
@@ -128,6 +128,7 @@ function AdminShowPets() {
           <TableHead>Status</TableHead>
           <TableHead>Category</TableHead>
           <TableHead>Breed</TableHead>
+          <TableHead>NGO Name </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -138,13 +139,7 @@ function AdminShowPets() {
             </TableCell>
             <TableCell className="font-semibold">{pet.name}</TableCell>
             <TableCell>
-              <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                pet.status === "Adopted" ? "bg-green-600 text-white" :
-                pet.status === "Requested" ? "bg-yellow-500 text-white" :
-                "bg-blue-500 text-white"
-              }`}>
-                {pet.status}
-              </span>
+              {pet.alreadyRequested ? "Requested" : "Available" }
             </TableCell>
             <TableCell className="capitalize">{pet.category}</TableCell>
             <TableCell>{pet.breed}</TableCell>

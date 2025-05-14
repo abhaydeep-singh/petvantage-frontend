@@ -5,11 +5,13 @@ import { AddPet } from '@/components/NGO/AddPet'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { hideLoader, showLoader } from "@/redux/loaderSlice"
+import { useNavigate } from 'react-router-dom'
 // const dispatch = useDispatch();
 
 function AdminHome() {
   const [open, setOpen] = useState(false)
   const isOpen = useSelector((state) => state.sidebar.isOpen);
+  const navigate = useNavigate();
   return (
     // sm:ml-64 is open
     <div className={`w-full h-screen ${isOpen ? "sm:ml-64" : "sm:ml-16"}`}>
@@ -29,10 +31,10 @@ function AdminHome() {
         {/* <br /> */}
         <p className='text-sm'>Track pet adoption progress, update statuses, and ensure every pet finds a loving home. Take action with just a click!</p>
         <div className='flex gap-2'>
-        <Button>Manage Adoptions</Button>
+        <Button onClick={()=>navigate("/admin/requests")}>Monitor Adoption Requests</Button>
         <Button onClick={() => setOpen(true)}>Add Pet</Button>
         <AddPet open={open} setOpen={setOpen} />
-        <Button>Show Pets</Button>
+        <Button onClick={()=>navigate("/admin/pets")}>Monitor All Pets</Button>
         </div>
       </div>
       </div>

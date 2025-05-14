@@ -113,7 +113,7 @@ function NGOProfile() {
       }
 
       const response = await axios.post(
-        `${apiURL}/api/petseeker/update`,
+        `${apiURL}/api/ngo/update`,
         formData,
         {
           headers: {

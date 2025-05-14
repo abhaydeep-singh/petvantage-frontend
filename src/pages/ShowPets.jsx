@@ -4,6 +4,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
 
 const apiURL = import.meta.env.VITE_API_URL;
 
@@ -11,7 +12,8 @@ function ShowPets() {
   const [pets, setPets] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [sortOption, setSortOption] = useState("");
-  const [viewMode, setViewMode] = useState("card"); // 'card' or 'table'
+  const [viewMode, setViewMode] = useState("table"); // 'card' or 'table'
+  const isOpen = useSelector((state) => state.sidebar.isOpen);
 
   const fetchPets = async () => {
     try {
@@ -47,7 +49,7 @@ function ShowPets() {
     });
 
   return (
-    <div className={`w-full min-h-screen bg-background p-6 ${false ? "sm:ml-64" : "sm:ml-16"}`}>
+    <div className={`w-full min-h-screen bg-background p-6 ${isOpen ? "sm:ml-64" : "sm:ml-16"}`}>
       {/* Top Controls */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <h1 className="text-2xl font-bold text-primary">Manage Pets</h1>
@@ -78,9 +80,9 @@ function ShowPets() {
           </Select> */}
 
           {/* Toggle View */}
-          <Button variant="outline" onClick={() => setViewMode(viewMode === "card" ? "table" : "card")}>
+          {/* <Button variant="outline" onClick={() => setViewMode(viewMode === "card" ? "table" : "card")}>
             {viewMode === "card" ? "Show Table View" : "Show Card View"}
-          </Button>
+          </Button> */}
         </div>
       </div>
 
@@ -97,13 +99,12 @@ function ShowPets() {
         <CardContent className="flex flex-col items-center p-4">
           <img src={pet.image} alt={pet.name} className="w-32 h-32 rounded-full object-cover mb-4" />
           <h2 className="text-lg font-semibold text-primary mb-2">{pet.name}</h2>
-          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-            pet.status === "Adopted" ? "bg-green-600 text-white" :
-            pet.status === "Requested" ? "bg-yellow-500 text-white" :
-            "bg-blue-500 text-white"
-          }`}>
-            {pet.status}
-          </span>
+                  <span
+          className={`px-3 py-1 rounded-full text-xs text-white font-medium`}
+        >
+          {pet.status}
+        </span>
+
         </CardContent>
       </Card>
     ))}
@@ -128,16 +129,10 @@ function ShowPets() {
             </TableCell>
             <TableCell className="font-semibold">{pet.name}</TableCell>
             <TableCell>
-              <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                pet.status === "Adopted" ? "bg-green-600 text-white" :
-                pet.status === "Requested" ? "bg-yellow-500 text-white" :
-                "bg-blue-500 text-white"
-              }`}>
-                {pet.status}
-              </span>
+              {pet.alreadyRequested ? "Requested" : "Available" }
             </TableCell>
             <TableCell className="capitalize">{pet.category}</TableCell>
-            <TableCell>{pet.breed}</TableCell>
+            <TableCell>{ pet.breed }</TableCell>
           </TableRow>
         ))}
       </TableBody>
