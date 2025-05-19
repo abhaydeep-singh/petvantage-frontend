@@ -3,7 +3,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils"; // ShadCN utility for class merging
 import { FeaturedArticles, ParticlesBackground } from "@/components";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { hideLoader, showLoader } from "@/redux/loaderSlice";
+import axios from "axios";
+const apiURL = import.meta.env.VITE_API_URL;
 
 const petCategories = [
   { name: "Dogs", bgColor: "bg-blue-500", nav:"/user-dashboard/pet-list/dogs" }, //FIXME:
@@ -27,6 +30,9 @@ function UserHome() {
     const isOpen = useSelector((state) => state.sidebar.isOpen);
   const [bgIndex, setBgIndex] = useState(0); // Controls background image index
   const navigate = useNavigate();
+
+
+  
 
   // Automatically change background image every 5 seconds
   useEffect(() => {
@@ -55,7 +61,7 @@ function UserHome() {
           {/* Dark Overlay*/}
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           <h1 className="relative text-primary text-3xl md:text-6xl font-bold">
-            Welcome, UserName
+            Welcome, {sessionStorage.getItem("name")}
           </h1>
         </div>
         <hr />

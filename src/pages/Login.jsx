@@ -308,8 +308,9 @@ function Login() {
                     {...registerRegister("regEmail", {
                       required: "Email is required",
                       pattern: {
-                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                          message: "Invalid email format",
+                        value:
+                          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        message: "Invalid email format",
                       },
                     })}
                   />
@@ -344,12 +345,13 @@ function Login() {
                   <Label htmlFor="contact">Contact</Label>
                   <Input
                     id="contact"
-                    type="number"
+                    type="text"
                     {...registerRegister("contact", {
                       required: "Contact number is required",
-                      minLength: {
-                        value: 10,
-                        message: "Contact must be 10 digits",
+                      pattern: {
+                        value: /^[6-9]\d{9}$/,
+                        message:
+                          "Enter a valid 10-digit contact",
                       },
                     })}
                   />

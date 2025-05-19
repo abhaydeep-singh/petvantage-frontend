@@ -142,12 +142,13 @@ function RegisterNGO() {
               <Label htmlFor="contact">Contact</Label>
               <Input
                 id="contact"
-                type="number"
+                type="text"
                 {...register("contact", {
                   required: "Contact number is required",
-                  minLength: {
-                    value: 10,
-                    message: "Contact must be 10 digits",
+                  pattern: {
+                    value: /^[6-9]\d{9}$/,
+                    message:
+                      "Enter a valid 10-digit contact starting with 6, 7, 8, or 9",
                   },
                 })}
               />

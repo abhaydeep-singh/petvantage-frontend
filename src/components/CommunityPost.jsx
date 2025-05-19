@@ -30,7 +30,7 @@ export default function CommunityPost({ post }) {
               />
             )}
             <div className="flex gap-6 mt-3 text-muted-foreground text-sm">
-              <Button variant="ghost" size="sm" className="flex items-center gap-1">
+              {/* <Button variant="ghost" size="sm" className="flex items-center gap-1">
                 <MessageCircle className="w-4 h-4" /> {post.comments}
               </Button>
               <Button variant="ghost" size="sm" className="flex items-center gap-1">
@@ -38,7 +38,7 @@ export default function CommunityPost({ post }) {
               </Button>
               <Button variant="ghost" size="sm" className="flex items-center gap-1">
                 <Heart className="w-4 h-4" /> {post.likes}
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>

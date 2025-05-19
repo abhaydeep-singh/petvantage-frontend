@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { hideLoader, showLoader } from "@/redux/loaderSlice"
 
 function getTimeAgo(dateString) {
-  const now = new Date();
-  const postDate = new Date(dateString);
-  const diffInSeconds = Math.floor((now - postDate) / 1000);
+const now = new Date();
+const postDate = new Date(dateString);
+
+const diffInSeconds = Math.floor((now.getTime() - postDate.getTime()) / 1000);
+
 
   const minutes = Math.floor(diffInSeconds / 60);
   const hours = Math.floor(minutes / 60);
@@ -54,7 +56,8 @@ function Community() {
           COMMUNITY
         </h1>
 
-        <CommunityPostInput />
+        <CommunityPostInput onPostSuccess={fetchPosts} />
+
         <br />
         {/* <CommunityPost
           post={{

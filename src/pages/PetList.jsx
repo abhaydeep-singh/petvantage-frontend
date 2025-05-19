@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 const apiURL = import.meta.env.VITE_API_URL;
 import { useDispatch, useSelector } from "react-redux"
-import { hideLoader, showLoader } from "@/redux/loaderSlice"
+import { hideLoader, showLoader } from "@/redux/loaderSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const PetList = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,30 @@ const PetList = () => {
 
       if(response.data.success){
           setTriggerRender(!triggerRender);
+          toast.success("Request Sent Succesfully!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    // transition: Bounce,
+                  });
+      }
+      else{
+        toast.warn(`${response.data.message}`, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  // transition: Bounce,
+                });
       }
       
     } catch (error) {
@@ -73,6 +98,19 @@ const PetList = () => {
 
   return (
     <div  className="p-6 mx-auto">
+      <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+              // transition={Bounce}
+            />
       <h2 className="text-2xl font-bold mb-4 text-center">Available Pets for Adoption</h2>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
         {pets?.length > 0 ? pets.map((pet,index) => (

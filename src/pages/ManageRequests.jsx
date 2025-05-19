@@ -120,12 +120,12 @@ const ManageRequests = () => {
                         )}
                       </p>
                       <p>
-                        <span className="font-medium text-foreground">
+                        {/* <span className="font-medium text-foreground">
                           Phone:
                         </span>{" "}
                         <span className="text-muted-foreground">
                           78787878787
-                        </span>
+                        </span> */}
                       </p>
                       <div className="flex gap-2 pt-2">
                         <Button

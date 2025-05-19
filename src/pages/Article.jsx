@@ -113,8 +113,15 @@ function Article() {
           }
         );
 
-        // console.log(response.data.data);
-        setComments(response.data.data[0].commentIDs);
+        console.log(response.data.data);
+        // setComments(response.data.data[0].commentIDs);
+        const matchingBlog = response.data.data.find((blog) => blog._id === id);
+        if (matchingBlog) {
+          setComments(matchingBlog.commentIDs);
+        } else {
+          setComments([]);
+        }
+
       } catch (error) {
         console.log("An error occured while fethcing comments: ", error);
       }

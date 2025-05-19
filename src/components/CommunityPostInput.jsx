@@ -1,64 +1,56 @@
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent } from "@/components/ui/card"
-import { useState } from "react"
-import { SendHorizonal, ImagePlus, X } from "lucide-react"
-import axios from "axios"
-import { ClipLoader } from "react-spinners"
-import { ToastContainer, toast } from "react-toastify"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
+import { SendHorizonal, ImagePlus, X } from "lucide-react";
+import axios from "axios";
+import { ClipLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
 
 const apiURL = import.meta.env.VITE_API_URL;
 
-export default function CommunityPostInput() {
-  const [content, setContent] = useState("")
-  const [image, setImage] = useState(null)
-  const [imagePreview, setImagePreview] = useState(null)
-  const [loading,setLoading] = useState(false);
-  
+export default function CommunityPostInput({ onPostSuccess }) {
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handlePost = async () => {
-    if (content.trim() === "" && !image) return
+    if (content.trim() === "" && !image) return;
     setLoading(true);
     // Create a FormData object
-    const formData = new FormData()
+    const formData = new FormData();
 
     // Append the content and image to FormData
-    formData.append("content", content)
+    formData.append("content", content);
 
     if (image) {
-      formData.append("image", image)
+      formData.append("image", image);
     }
 
     try {
       // Send the FormData object to the backend (replace with your API URL)
-      let response = await axios.post(`${apiURL}/api/post/add`,formData,{
-        headers:{
-          authorization:sessionStorage.getItem("token")
-        }
-
+      let response = await axios.post(`${apiURL}/api/post/add`, formData, {
+        headers: {
+          authorization: sessionStorage.getItem("token"),
+        },
       });
       console.log(response);
-      
-      if(response.data.success){
+
+      if (response.data.success) {
         setImage(null);
         setImagePreview(null);
         setContent("");
-        toast.success('Post Uploaded Succesfully!', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          // transition: Bounce,
-          });
-      }
-      else{
+        toast.success("Post Uploaded Successfully!");
+
+        // 🔁 Refetch posts
+        if (typeof onPostSuccess === "function") {
+          onPostSuccess();
+        }
+      } else {
         // Show error Toaster
-        toast.warn('Upload Failed! Something went wrong', {
+        toast.warn("Upload Failed! Something went wrong", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -68,29 +60,27 @@ export default function CommunityPostInput() {
           progress: undefined,
           theme: "dark",
           // transition: Bounce,
-          });
+        });
       }
     } catch (error) {
-      console.error("Error while posting:", error)
-    
-    }
-    finally{
+      console.error("Error while posting:", error);
+    } finally {
       setLoading(false);
     }
-  }
+  };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
-      setImage(file)
-      setImagePreview(URL.createObjectURL(file))
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file));
     }
-  }
+  };
 
   const removeImage = () => {
-    setImage(null)
-    setImagePreview(null)
-  }
+    setImage(null);
+    setImagePreview(null);
+  };
 
   return (
     <Card className="w-full max-w-2xl mx-auto mt-4 shadow-md bg-background text-foreground">
@@ -155,19 +145,21 @@ export default function CommunityPostInput() {
                 onChange={handleImageChange}
               />
             </div>
-            {loading ? <ClipLoader color="#FACC15" /> : <Button
-              onClick={handlePost}
-              disabled={!content.trim() && !image}
-              className="flex gap-2"
-            >
-              <SendHorizonal className="w-4 h-4" />
-              Post
-            </Button> }
-            
-            
+            {loading ? (
+              <ClipLoader color="#FACC15" />
+            ) : (
+              <Button
+                onClick={handlePost}
+                disabled={!content.trim() && !image}
+                className="flex gap-2"
+              >
+                <SendHorizonal className="w-4 h-4" />
+                Post
+              </Button>
+            )}
           </div>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

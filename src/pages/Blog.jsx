@@ -44,7 +44,7 @@ function Blog() {
         {/* Navbar */}
         <nav className="flex justify-between items-center py-4 border-b border-gray-700">
           <h1 className="text-3xl font-bold text-primary">PetVantage Blog</h1>
-          <Button>Subscribe</Button>
+          {/* <Button>Subscribe</Button> */}
         </nav>
 
         {/* Hero Section */}
