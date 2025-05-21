@@ -12,17 +12,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import axios from "axios";
-import { addListener } from "@reduxjs/toolkit";
-import { hideLoader, showLoader } from "@/redux/loaderSlice";
-const apiURL = import.meta.env.VITE_API_URL;
 import { ToastContainer, toast } from "react-toastify";
+import { hideLoader, showLoader } from "@/redux/loaderSlice";
+import "react-toastify/dist/ReactToastify.css";
+
+const apiURL = import.meta.env.VITE_API_URL;
 
 function NGOProfile() {
   const isOpen = useSelector((state) => state.sidebar.isOpen);
   const dispatch = useDispatch();
   const [myID, setMyID] = useState("");
 
-  // Profile info
   const [profile, setProfile] = useState({
     name: "",
     email: "",
@@ -33,8 +33,6 @@ function NGOProfile() {
   });
 
   const [previewImage, setPreviewImage] = useState(null);
-
-  // Password change dialog state
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -43,7 +41,7 @@ function NGOProfile() {
   const fetchMyData = async () => {
     try {
       dispatch(showLoader());
-      let me = await axios.post(
+      const me = await axios.post(
         `${apiURL}/api/ngo/me`,
         {},
         {
@@ -52,9 +50,11 @@ function NGOProfile() {
           },
         }
       );
+
       const meID = me.data.data._id;
       setMyID(meID);
-      let response = await axios.post(
+
+      const response = await axios.post(
         `${apiURL}/api/ngo/getsingle`,
         { _id: meID },
         {
@@ -63,24 +63,24 @@ function NGOProfile() {
           },
         }
       );
-      console.log(response.data.data);
 
-      let data = {
-        name: response.data.data.userID.name, //check
-        email: response.data.data.userID.email, //check
+      const data = {
+        name: response.data.data.userID.name,
+        email: response.data.data.userID.email,
         contact: response.data.data.contact,
         address: response.data.data.address,
         username: response.data.data.userID.username,
         image: response.data.data.userID.image,
       };
+
       setProfile(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       dispatch(hideLoader());
     }
   };
-  // Mock fetch on mount
+
   useEffect(() => {
     fetchMyData();
   }, []);
@@ -95,8 +95,34 @@ function NGOProfile() {
     }
   };
 
+  // Email validation regex
+  const validateEmail = (email) => {
+    // Basic RFC2822 compliant regex
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  // Contact validation: 10 digits, first digit 6-9
+  const validateContact = (contact) => {
+    return /^[6-9]\d{9}$/.test(contact);
+  };
+
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation checks
+    if (!validateEmail(profile.email)) {
+      toast.warn("Please enter a valid email address.", { theme: "dark" });
+      return;
+    }
+
+    if (!validateContact(profile.contact)) {
+      toast.warn(
+        "Contact must be valid.",
+        { theme: "dark" }
+      );
+      return;
+    }
+
     dispatch(showLoader());
 
     try {
@@ -106,171 +132,95 @@ function NGOProfile() {
       formData.append("email", profile.email);
       formData.append("contact", profile.contact);
       formData.append("address", profile.address);
-      formData.append("username", profile.username); // optional, if you update it
-    //   If it’s a File, you append it. If not (it’s still just the URL string from the backend), skip appending it — or else it’ll cause issues.
+      formData.append("username", profile.username);
+
       if (profile.image instanceof File) {
         formData.append("image", profile.image);
       }
 
-      const response = await axios.post(
-        `${apiURL}/api/ngo/update`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            authorization: sessionStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await axios.post(`${apiURL}/api/ngo/update`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          authorization: sessionStorage.getItem("token"),
+        },
+      });
 
-      console.log("Update success:", response.data);
-      if(response.data.success){
-         toast.success(`Profile Updated Succesfully`, {
-                  position: "top-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: false,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "dark",
-                  // transition: Bounce,
-                });
-      }
-      else if(response.data.success == false){
-        toast.warn(`${response.data.message}`, {
-                  position: "top-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: false,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "dark",
-                  // transition: Bounce,
-                });
+      if (response.data.success) {
+        toast.success("Profile Updated Successfully", { theme: "dark" });
+      } else {
+        toast.warn(response.data.message || "Update Failed", { theme: "dark" });
       }
     } catch (error) {
       console.error("Update failed:", error);
+      toast.error("An error occurred while updating profile.", { theme: "dark" });
     } finally {
       dispatch(hideLoader());
     }
   };
 
-  const handlePasswordChange = async(e) => {
+  const handlePasswordChange = async (e) => {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
-      alert("New passwords do not match!");
-      return;
+      return toast.warn("New passwords do not match!", { theme: "dark" });
     }
-    // console.log("Password change request:", { oldPassword, newPassword });
-    // Call change password API here
+
     dispatch(showLoader());
     try {
-      let response = await axios.post(`${apiURL}/api/user/changepass`,{
-        userID:sessionStorage.getItem("_id"),
-        oldPassword:oldPassword,
-        newPassword:newPassword,  
-        confirmPassword:confirmNewPassword
-      },{headers:{authorization:sessionStorage.getItem("token")}})
-      console.log(response);
-      if(response.data.success){
-         toast.success(`Password Change Succesfull`, {
-                  position: "top-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: false,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "dark",
-                  // transition: Bounce,
-                });
-      }
-      else{
-        toast.warn(`${response.data.message}`, {
-                  position: "top-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: false,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "dark",
-                  // transition: Bounce,
-                });
+      const response = await axios.post(
+        `${apiURL}/api/user/changepass`,
+        {
+          userID: sessionStorage.getItem("_id"),
+          oldPassword,
+          newPassword,
+          confirmPassword: confirmNewPassword,
+        },
+        {
+          headers: { authorization: sessionStorage.getItem("token") },
+        }
+      );
+
+      if (response.data.success) {
+        toast.success("Password Changed Successfully", { theme: "dark" });
+      } else {
+        toast.warn(response.data.message || "Password change failed", {
+          theme: "dark",
+        });
       }
     } catch (error) {
-      console.log(error);
-    }
-    finally{
+      console.error("Password change error:", error);
+      toast.error("Error changing password", { theme: "dark" });
+    } finally {
       dispatch(hideLoader());
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmNewPassword("");
+      setOpen(false);
     }
-    setOldPassword("");
-    setNewPassword("");
-    setConfirmNewPassword("");
-    setOpen(false);
   };
 
   return (
-    <div
-      className={`w-full min-h-screen p-4 ${
-        isOpen ? "sm:ml-64" : "sm:ml-16"
-      } `}
-    >
-      <ToastContainer/>
+    <div className={`w-full min-h-screen p-4 ${isOpen ? "sm:ml-64" : "sm:ml-16"}`}>
+      <ToastContainer />
       <Card className="max-w-3xl mx-auto mt-10 shadow-xl shadow-accent">
         <CardHeader>
           <CardTitle>Profile Settings</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleProfileSubmit} className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                name="name"
-                value={profile.name}
-                onChange={handleProfileChange}
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                value={profile.email}
-                onChange={handleProfileChange}
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                name="username"
-                value={profile.username}
-                onChange={handleProfileChange}
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="contact">Contact</Label>
-              <Input
-                id="contact"
-                name="contact"
-                value={profile.contact}
-                onChange={handleProfileChange}
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="address">Address</Label>
-              <Input
-                id="address"
-                name="address"
-                value={profile.address}
-                onChange={handleProfileChange}
-              />
-            </div>
+            {["name", "email", "username", "contact", "address"].map((field) => (
+              <div key={field} className="grid gap-2">
+                <Label htmlFor={field}>
+                  {field.charAt(0).toUpperCase() + field.slice(1)}
+                </Label>
+                <Input
+                  id={field}
+                  name={field}
+                  type={field === "email" ? "email" : "text"}
+                  value={profile[field]}
+                  onChange={handleProfileChange}
+                />
+              </div>
+            ))}
             <div className="grid gap-2">
               <Label htmlFor="image">Profile Picture</Label>
               <Input
@@ -323,9 +273,7 @@ function NGOProfile() {
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="confirmNewPassword">
-                    Confirm New Password
-                  </Label>
+                  <Label htmlFor="confirmNewPassword">Confirm New Password</Label>
                   <Input
                     id="confirmNewPassword"
                     type="password"

@@ -96,7 +96,7 @@ const ManageRequests = () => {
                   >
                     <CardContent className="p-4 space-y-4">
                       <h2 className="text-lg font-semibold text-primary">
-                        🐾 {req.petID.name}
+                        🐾 {req.petID?.name}
                       </h2>
                       <Separator />
                       <p>
@@ -105,7 +105,7 @@ const ManageRequests = () => {
                         </span>{" "}
                         {req.reqUserID && (
                           <span className="text-muted-foreground">
-                            {req.reqUserID.name}
+                            {req.reqUserID?.name}
                           </span>
                         )}
                       </p>
@@ -115,7 +115,7 @@ const ManageRequests = () => {
                         </span>{" "}
                         {req.reqUserID && (
                           <span className="text-muted-foreground">
-                            {req.reqUserID.email}
+                            {req.reqUserID?.email}
                           </span>
                         )}
                       </p>
@@ -165,10 +165,10 @@ const ManageRequests = () => {
                   <Card key={index} className="bg-muted/30">
                     <CardContent className="p-4 flex justify-between items-center">
                       <div>
-                        <h3 className="font-semibold">{req.petID.name}</h3>
+                        <h3 className="font-semibold">{req.petID?.name}</h3>
                         {req.reqUserID ? (
                           <p className="text-sm text-muted-foreground">
-                            {req.reqUserID.name} — {req.reqUserID.email}
+                            {req.reqUserID?.name} — {req.reqUserID?.email}
                           </p>
                         ) : null}
                       </div>

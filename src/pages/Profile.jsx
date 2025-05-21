@@ -94,11 +94,25 @@ function Profile() {
     return regex.test(email);
   };
 
+  const isValidContact = (contact) => {
+    const contactRegex = /^[6-9]\d{9}$/;
+    return contactRegex.test(contact);
+  };
+
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
 
     if (!isValidEmail(profile.email)) {
       toast.warn("Please enter a valid email address", {
+        position: "top-right",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      return;
+    }
+
+    if (!isValidContact(profile.contact)) {
+      toast.warn("Contact must be 10 digits and start with 6-9", {
         position: "top-right",
         autoClose: 5000,
         theme: "dark",
@@ -248,6 +262,11 @@ function Profile() {
                 name="contact"
                 value={profile.contact}
                 onChange={handleProfileChange}
+                className={
+                  profile.contact && !isValidContact(profile.contact)
+                    ? "border-red-500"
+                    : ""
+                }
               />
             </div>
             <div className="grid gap-2">
