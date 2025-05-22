@@ -45,7 +45,7 @@ function RegisterNGO() {
       if (response.data.success) {
         toast.success("Register Successful!", { theme: "dark" });
         setTimeout(()=>{
-            navigate("/ngo-dashboard/ngo-home");
+            navigate("/login/login");
         },1000)
       } else {
         toast.warn(`Register Failed: ${response.data.message}`, { theme: "dark" });
@@ -111,7 +111,7 @@ function RegisterNGO() {
                   },
                 })}
               />
-              {errors.regEmail && (
+              {errors.regEmail && ( 
                 <p className="text-red-500 text-sm">
                   {errors.regEmail.message}
                 </p>

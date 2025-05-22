@@ -150,7 +150,9 @@ function Login() {
           theme: "dark",
           // transition: Bounce,
         });
-        navigate("/user-dashboard/user-home");
+        // setTimeout(())
+        navigate("/login/login");
+        window.location.reload();
       } else {
         toast.warn(`Register Failed: ${response.data.message}`, {
           position: "top-right",
