@@ -30,12 +30,14 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoader, showLoader } from "@/redux/loaderSlice";
 import { ToastContainer, toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 const apiURL = import.meta.env.VITE_API_URL;
 
 function AdminShowPets() {
   const isOpen = useSelector((state) => state.sidebar.isOpen);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [pets, setPets] = useState([]);
   const [editingPet, setEditingPet] = useState(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -114,6 +116,7 @@ function AdminShowPets() {
   const handleEditSubmit = async () => {
     try {
       dispatch(showLoader());
+      setLoading(true);
       const formData = new FormData();
       formData.append("_id", editingPet._id);
       formData.append("name", editForm.name);
@@ -143,6 +146,7 @@ function AdminShowPets() {
       console.error("Update failed", err);
     } finally {
       dispatch(hideLoader());
+       setLoading(false);
     }
   };
 
@@ -244,7 +248,8 @@ function AdminShowPets() {
                               className="h-24 mt-2 rounded"
                             />
                           )}
-                          <Button onClick={handleEditSubmit}>Save</Button>
+                          {loading?(<ClipLoader color="#FACC15" />):(<Button onClick={handleEditSubmit}>Save</Button>)}
+                          
                         </div>
                       </DialogContent>
                     </Dialog>

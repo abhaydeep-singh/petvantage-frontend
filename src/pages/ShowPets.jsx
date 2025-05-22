@@ -25,11 +25,13 @@ import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoader, showLoader } from "@/redux/loaderSlice";
 import { ToastContainer, toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 const apiURL = import.meta.env.VITE_API_URL;
  
 function ShowPets() {
   const [pets, setPets] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [sortOption, setSortOption] = useState("");
   const [viewMode, setViewMode] = useState("table"); // 'card' or 'table'
@@ -121,6 +123,7 @@ function ShowPets() {
   const handleEditSubmit = async () => {
     try {
       dispatch(showLoader());
+      setLoading(true);
       const formData = new FormData();
       formData.append("_id", editingPet._id);
       formData.append("name", editForm.name);
@@ -150,6 +153,7 @@ function ShowPets() {
       console.error("Update failed", err);
     } finally {
       dispatch(hideLoader());
+      setLoading(false);
     }
   };
 
@@ -294,7 +298,7 @@ function ShowPets() {
                                           className="h-24 mt-2 rounded"
                                         />
                                       )}
-                                      <Button onClick={handleEditSubmit}>Save</Button>
+                                      {loading?(<ClipLoader color="#FACC15" />):(<Button onClick={handleEditSubmit}>Save</Button>)}
                                     </div>
                                   </DialogContent>
                                 </Dialog>
